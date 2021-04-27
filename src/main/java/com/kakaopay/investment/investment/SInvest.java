@@ -57,18 +57,18 @@ public class SInvest {
             // process
             // read USER
             Optional<EUser> user = rUser.findById(userId);
-            if(user.isEmpty()) {
+            if(!user.isPresent()) {
                 throw new InvestmentException("사용자를 찾을 수 없습니다.");
             }
     
             // update PRODUCT
             Optional<EProduct> product = rProduct.findById(input.getProductId());
-            if(product.isEmpty()) {
+            if(!product.isPresent()) {
                 throw new InvestmentException("투자상품을 찾을 수 없습니다.");
             }
             
             EProduct prdValue = product.get();
-            if(!ProductStateType.OPEN.equals(prdValue.getProductState())) {
+            if(!ProductStateType.OPEN.equals(ProductStateType.valueOf(prdValue.getProductState()))) {
                 throw new InvestmentException("마감된 투자상품입니다.");
             }
 

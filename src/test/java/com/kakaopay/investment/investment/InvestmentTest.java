@@ -1,7 +1,8 @@
 package com.kakaopay.investment.investment;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Optional;
 
@@ -54,13 +55,14 @@ public class InvestmentTest extends InvestmentApplicationTests{
                 .product(eProduct)
                 .investingAmount(10L)
                 .build();
-        rInvestment.save(eInvestment);
+        EInvestment saved = rInvestment.save(eInvestment);
+        assertNotNull(saved);
 
         // when
         Optional<EInvestment> found = rInvestment.findById(eInvestment.getInvestmentId());
 
         // then
-        assertFalse(found.isEmpty());
+        assertTrue(found.isPresent());
         EInvestment investment = found.get();
         assertEquals(eInvestment.getInvestmentId(), investment.getInvestmentId());
         assertEquals(eInvestment.getUser().getUserId(), investment.getUser().getUserId());

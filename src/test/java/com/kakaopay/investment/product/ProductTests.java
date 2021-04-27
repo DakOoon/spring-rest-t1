@@ -1,7 +1,7 @@
 package com.kakaopay.investment.product;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
@@ -31,13 +31,14 @@ public class ProductTests extends InvestmentApplicationTests{
                 .startedAt(LocalDateTime.of(2000, 1, 1, 1, 1, 1, 1))
                 .finishedAt(LocalDateTime.of(2000, 1, 1, 1, 1, 1, 1))
                 .build();
-        EProduct created = rProdcut.save(eProduct);
-        
+        EProduct saved = rProdcut.save(eProduct);
+        assertNotNull(saved);
+
         // when
         Optional<EProduct> found = rProdcut.findById(eProduct.getProductId());
 
         // then
-        assertFalse(found.isEmpty());
+        assertTrue(found.isPresent());
         EProduct product = found.get();
         assertEquals(eProduct.getProductId(), product.getProductId());
         assertEquals(eProduct.getTitle(), product.getTitle());
@@ -59,13 +60,14 @@ public class ProductTests extends InvestmentApplicationTests{
         System.out.println("ProductTests: entityWithDefault");
         EProduct eProduct = EProduct.builder()
                 .build();
-        rProdcut.save(eProduct);
+        EProduct saved = rProdcut.save(eProduct);
+        assertNotNull(saved);
         
         // when
         Optional<EProduct> found = rProdcut.findById(eProduct.getProductId());
 
         // then
-        assertFalse(found.isEmpty());
+        assertTrue(found.isPresent());
         EProduct product = found.get();
         assertEquals(eProduct.getProductId(), product.getProductId());
         assertEquals(eProduct.getTitle(), product.getTitle());
@@ -73,10 +75,11 @@ public class ProductTests extends InvestmentApplicationTests{
         assertEquals(0L, product.getCurrentInvestingAmout());
         assertEquals(0L, product.getInvestorCount());
         assertEquals(ProductStateType.CLOSED.value(), product.getProductState());
-        LocalDateTime now = LocalDateTime.now();
-        assertTrue(product.getStartedAt().isAfter(eProduct.getStartedAt()) && product.getStartedAt().isBefore(now));
-        assertTrue(product.getStartedAt().isAfter(eProduct.getFinishedAt()) && product.getFinishedAt().isBefore(now));
-
+        assertEquals(DateTimeUtils.format(eProduct.getStartedAt())
+                , DateTimeUtils.format(product.getStartedAt()));
+        assertEquals(DateTimeUtils.format(eProduct.getFinishedAt())
+                , DateTimeUtils.format(product.getFinishedAt()));
+                
         rProdcut.deleteById(eProduct.getProductId());
     }
 
