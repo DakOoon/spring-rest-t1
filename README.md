@@ -1,3 +1,5 @@
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/DakOoon/spring-rest-t1)
+
 # 아키텍처
     Client - WebServer:APACHE (Load balancing) - WebApplicationServer:TOMCAT - DB:MYSQL 
                                                - WebApplicationServer:TOMCAT -
