@@ -1,10 +1,12 @@
 package com.kakaopay.investment.investment;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 import com.kakaopay.investment.InvestmentApplicationTests;
 import com.kakaopay.investment.product.EProduct;
@@ -15,28 +17,27 @@ import com.kakaopay.investment.util.DateTimeUtils;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class InvestmentTest extends InvestmentApplicationTests{
+public class InvestmentTests extends InvestmentApplicationTests {
     
     @Autowired
     private RInvestment rInvestment;
 
     @Autowired
     private RUser rUser;    
-    private EUser eUser;
+    private EUser eUser = EUser.builder().build();
 
     @Autowired
     private RProdcut rProdcut;
-    private EProduct eProduct;
+    private EProduct eProduct = EProduct.builder().build();
 
     @BeforeEach
     public void createRefer() {
-        eUser = EUser.builder().build();
         rUser.save(eUser);
-
-        eProduct = EProduct.builder().build();
         rProdcut.save(eProduct);
     }
 
@@ -47,9 +48,34 @@ public class InvestmentTest extends InvestmentApplicationTests{
     }
 
     @Test
+    @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
+    @DisplayName("InvestmentTests: entity")
     public void entity() {
-        // given
-        System.out.println("InvestmentTest: entity");
+        /* given */
+        EUser origin = EUser.builder()
+                .build();
+
+        /* when */
+        EUser saved = rUser.save(origin);
+        
+        Optional<EUser> found = rUser.findById(origin.getUserId());
+        
+        rUser.deleteById(origin.getUserId());
+        Optional<EUser> deleted = rUser.findById(origin.getUserId());
+
+        /* then */
+        assertNotNull(saved);
+        
+        assertTrue(found.isPresent());
+        EUser found0 = found.get();
+        assertEquals(origin.getUserId(), found0.getUserId());
+        
+        assertNotNull(deleted);
+        assertFalse(deleted.isPresent());
+
+
+
+        /* given */
         EInvestment eInvestment = EInvestment.builder()
                 .user(eUser)
                 .product(eProduct)
@@ -58,10 +84,10 @@ public class InvestmentTest extends InvestmentApplicationTests{
         EInvestment saved = rInvestment.save(eInvestment);
         assertNotNull(saved);
 
-        // when
+        /* when */
         Optional<EInvestment> found = rInvestment.findById(eInvestment.getInvestmentId());
 
-        // then
+        /* then */
         assertTrue(found.isPresent());
         EInvestment investment = found.get();
         assertEquals(eInvestment.getInvestmentId(), investment.getInvestmentId());
