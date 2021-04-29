@@ -1,28 +1,33 @@
 package com.kakaopay.investment.product;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 import com.kakaopay.investment.InvestmentApplicationTests;
 import com.kakaopay.investment.util.DateTimeUtils;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class ProductTests extends InvestmentApplicationTests{
+public class ProductTests extends InvestmentApplicationTests {
     
     @Autowired
     private RProdcut rProdcut;
 
     @Test
+    @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
+    @DisplayName("ProductTests: entity")
     public void entity() {
-        // given
-        System.out.println("ProductTests: entity");
-        EProduct eProduct = EProduct.builder()
+        /* given */
+        EProduct origin = EProduct.builder()
                 .title("testTitle")
                 .totalInvestingAmount(10L)
                 .currentInvestingAmout(5L)
@@ -31,56 +36,69 @@ public class ProductTests extends InvestmentApplicationTests{
                 .startedAt(LocalDateTime.of(2000, 1, 1, 1, 1, 1, 1))
                 .finishedAt(LocalDateTime.of(2000, 1, 1, 1, 1, 1, 1))
                 .build();
-        EProduct saved = rProdcut.save(eProduct);
+                
+        /* when */
+        EProduct saved = rProdcut.save(origin);
+        
+        Optional<EProduct> found = rProdcut.findById(origin.getProductId());
+        
+        rProdcut.deleteById(origin.getProductId());
+        Optional<EProduct> deleted = rProdcut.findById(origin.getProductId());
+                
+        /* then */
         assertNotNull(saved);
-
-        // when
-        Optional<EProduct> found = rProdcut.findById(eProduct.getProductId());
-
-        // then
+        
         assertTrue(found.isPresent());
-        EProduct product = found.get();
-        assertEquals(eProduct.getProductId(), product.getProductId());
-        assertEquals(eProduct.getTitle(), product.getTitle());
-        assertEquals(eProduct.getTotalInvestingAmount(), product.getTotalInvestingAmount());
-        assertEquals(eProduct.getCurrentInvestingAmout(), product.getCurrentInvestingAmout());
-        assertEquals(eProduct.getInvestorCount(), product.getInvestorCount());
-        assertEquals(eProduct.getProductState(), product.getProductState());
-        assertEquals(DateTimeUtils.format(eProduct.getStartedAt())
-                , DateTimeUtils.format(product.getStartedAt()));
-        assertEquals(DateTimeUtils.format(eProduct.getFinishedAt())
-                , DateTimeUtils.format(product.getFinishedAt()));
-
-        rProdcut.deleteById(eProduct.getProductId());
+        EProduct found0 = found.get();
+        assertEquals(origin.getProductId(), found0.getProductId());
+        assertEquals(origin.getTitle(), found0.getTitle());
+        assertEquals(origin.getTotalInvestingAmount(), found0.getTotalInvestingAmount());
+        assertEquals(0L, found0.getCurrentInvestingAmout());
+        assertEquals(0L, found0.getInvestorCount());
+        assertEquals(origin.getProductState(), found0.getProductState());
+        assertEquals(DateTimeUtils.format(origin.getStartedAt())
+                , DateTimeUtils.format(found0.getStartedAt()));
+        assertEquals(DateTimeUtils.format(origin.getFinishedAt())
+                , DateTimeUtils.format(found0.getFinishedAt()));
+        
+        assertNotNull(deleted);
+        assertFalse(deleted.isPresent());
     }
 
     @Test
+    @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
+    @DisplayName("ProductTests: entityWithDefault")
     public void entityWithDefault() {
-        // given
-        System.out.println("ProductTests: entityWithDefault");
-        EProduct eProduct = EProduct.builder()
+        /* given */
+        EProduct origin = EProduct.builder()
                 .build();
-        EProduct saved = rProdcut.save(eProduct);
+                
+        /* when */
+        EProduct saved = rProdcut.save(origin);
+        
+        Optional<EProduct> found = rProdcut.findById(origin.getProductId());
+        
+        rProdcut.deleteById(origin.getProductId());
+        Optional<EProduct> deleted = rProdcut.findById(origin.getProductId());
+                
+        /* then */
         assertNotNull(saved);
         
-        // when
-        Optional<EProduct> found = rProdcut.findById(eProduct.getProductId());
-
-        // then
         assertTrue(found.isPresent());
-        EProduct product = found.get();
-        assertEquals(eProduct.getProductId(), product.getProductId());
-        assertEquals(eProduct.getTitle(), product.getTitle());
-        assertEquals(0L, product.getTotalInvestingAmount());
-        assertEquals(0L, product.getCurrentInvestingAmout());
-        assertEquals(0L, product.getInvestorCount());
-        assertEquals(ProductStateType.CLOSED.value(), product.getProductState());
-        assertEquals(DateTimeUtils.format(eProduct.getStartedAt())
-                , DateTimeUtils.format(product.getStartedAt()));
-        assertEquals(DateTimeUtils.format(eProduct.getFinishedAt())
-                , DateTimeUtils.format(product.getFinishedAt()));
+        EProduct found0 = found.get();
+        assertEquals(origin.getProductId(), found0.getProductId());
+        assertEquals(origin.getTitle(), found0.getTitle());
+        assertEquals(0L, found0.getTotalInvestingAmount());
+        assertEquals(0L, found0.getCurrentInvestingAmout());
+        assertEquals(0L, found0.getInvestorCount());
+        assertEquals(ProductStateType.CLOSED.value(), found0.getProductState());
+        assertEquals(DateTimeUtils.format(origin.getStartedAt())
+                , DateTimeUtils.format(found0.getStartedAt()));
+        assertEquals(DateTimeUtils.format(origin.getFinishedAt())
+                , DateTimeUtils.format(found0.getFinishedAt()));
                 
-        rProdcut.deleteById(eProduct.getProductId());
+        assertNotNull(deleted);
+        assertFalse(deleted.isPresent());
     }
 
     public void findByDate() {
