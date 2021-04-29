@@ -52,51 +52,33 @@ public class InvestmentTests extends InvestmentApplicationTests {
     @DisplayName("InvestmentTests: entity")
     public void entity() {
         /* given */
-        EUser origin = EUser.builder()
-                .build();
-
-        /* when */
-        EUser saved = rUser.save(origin);
-        
-        Optional<EUser> found = rUser.findById(origin.getUserId());
-        
-        rUser.deleteById(origin.getUserId());
-        Optional<EUser> deleted = rUser.findById(origin.getUserId());
-
-        /* then */
-        assertNotNull(saved);
-        
-        assertTrue(found.isPresent());
-        EUser found0 = found.get();
-        assertEquals(origin.getUserId(), found0.getUserId());
-        
-        assertNotNull(deleted);
-        assertFalse(deleted.isPresent());
-
-
-
-        /* given */
-        EInvestment eInvestment = EInvestment.builder()
+        EInvestment origin = EInvestment.builder()
                 .user(eUser)
                 .product(eProduct)
                 .investingAmount(10L)
                 .build();
-        EInvestment saved = rInvestment.save(eInvestment);
-        assertNotNull(saved);
-
+                
         /* when */
-        Optional<EInvestment> found = rInvestment.findById(eInvestment.getInvestmentId());
+        EInvestment saved = rInvestment.save(origin);
+        
+        Optional<EInvestment> found = rInvestment.findById(origin.getInvestmentId());
+        
+        rInvestment.deleteById(origin.getInvestmentId());
+        Optional<EInvestment> deleted = rInvestment.findById(origin.getInvestmentId());
 
         /* then */
+        assertNotNull(saved);
+
         assertTrue(found.isPresent());
-        EInvestment investment = found.get();
-        assertEquals(eInvestment.getInvestmentId(), investment.getInvestmentId());
-        assertEquals(eInvestment.getUser().getUserId(), investment.getUser().getUserId());
-        assertEquals(eInvestment.getProduct().getProductId(), investment.getProduct().getProductId());
-        assertEquals(eInvestment.getInvestingAmount(), investment.getInvestingAmount());
-        assertEquals(DateTimeUtils.format(eInvestment.getInvestedAt())
-                , DateTimeUtils.format(investment.getInvestedAt()));
+        EInvestment found0 = found.get();
+        assertEquals(origin.getInvestmentId(), found0.getInvestmentId());
+        assertEquals(origin.getUser().getUserId(), found0.getUser().getUserId());
+        assertEquals(origin.getProduct().getProductId(), found0.getProduct().getProductId());
+        assertEquals(origin.getInvestingAmount(), found0.getInvestingAmount());
+        assertEquals(DateTimeUtils.format(origin.getInvestedAt())
+                , DateTimeUtils.format(found0.getInvestedAt()));
         
-        rInvestment.deleteById(eInvestment.getInvestmentId());
+        assertNotNull(deleted);
+        assertFalse(deleted.isPresent());
     }
 }
