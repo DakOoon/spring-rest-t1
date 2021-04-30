@@ -1,39 +1,76 @@
 package com.kakaopay.investment.api.my;
 
-import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import com.kakaopay.investment.InvestmentApplicationTests;
+import com.kakaopay.investment.investment.DIGetMyInvestments;
+import com.kakaopay.investment.investment.DOGetMyInvestments;
+import com.kakaopay.investment.investment.SGetMyInvestments;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureMockMvc
+// @WebMvcTest(CMyInvestment.class)
 public class CMyInvestmentTests extends InvestmentApplicationTests {
 
-    @Test
-    public void callCMyInvestmentGet() {
-        // given
-        System.out.println("CMyInvestmentTests: callCMyInvestmentGet");
+    @Autowired
+    private MockMvc mockMvc;
 
-        // when
-        // OkHttpClient client = new OkHttpClient().newBuilder().build();
-        // MediaType mediaType = MediaType.parse("application/json");
-        // RequestBody body = RequestBody.create(
-        //         "{\r\n\t\"header\":{\r\n\t\t\"service\": \"WORKFLOW.ENGINE.SFlowModelDownload\"\r\n\t},\r\n\t\"dto\":{\r\n\t\t\"FLOWNAME\":\"hah2a2\"                           // required\r\n\t}\r\n}",
-        //         mediaType);
-        // Request request = new Request.Builder().url("http://127.0.0.1:8080?").method("GET", body)
-        //         .addHeader("Content-Type", "application/json").build();
-        // try {
-        //     Response response = client.newCall(request).execute();
-        // } catch (IOException e) {
-        //     e.printStackTrace();
-        // }
+    @MockBean
+    private SGetMyInvestments sGetMyInvestments;
+
+    @Test
+    @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
+    @DisplayName("CMyInvestmentTests: GET api/investment/my/investments")
+    public void get() throws Exception {
+        /* given */
+        String uri = "/api/investment/my/investments";
+
+        DIGetMyInvestments serviceInput = DIGetMyInvestments.builder()
+                                        .userId(1L)
+                                        .build();
+        DOGetMyInvestments data = DOGetMyInvestments.builder()
+                                        .productId(1L)
+                                        .productTitle("product")
+                                        .totalInvestingAmount(1L)
+                                        .InvestingAmount(1L)
+                                        .investedAt(LocalDateTime.of(2000, 1, 1, 1, 1, 1, 1))
+                                        .build();
+        List<DOGetMyInvestments> serviceOutput = new ArrayList<>();
+        serviceOutput.add(data);
         
-        // then
+        Mockito.when(sGetMyInvestments.service(serviceInput)).thenReturn(serviceOutput);
+
+        /* when */
+        MultiValueMap<String, String> input = new LinkedMultiValueMap<>();
+        input.add("X-USER-ID", "1");
         
+        mockMvc.perform(MockMvcRequestBuilders.get(uri).params(input))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string("hello gracelove"))
+                .andDo(MockMvcResultHandlers.print());
+
+        /* then */
+
     }
 }
