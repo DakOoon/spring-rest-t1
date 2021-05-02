@@ -1,5 +1,7 @@
 package com.kakaopay.investment.api.my;
 
+import java.util.List;
+
 import com.kakaopay.investment.investment.DIGetMyInvestments;
 import com.kakaopay.investment.investment.DIInvest;
 import com.kakaopay.investment.investment.DOGetMyInvestments;
@@ -23,11 +25,14 @@ public class CMyInvestment {
     private final SInvest sInvest;
 
     @GetMapping("api/investment/my/investments")
-    public Iterable<DOGetMyInvestments> getMyInvestments(@RequestHeader(value = "X-USER-ID") Long userId) {
+    public List<DOGetMyInvestments> getMyInvestments(@RequestHeader(value = "X-USER-ID") Long userId) {
         DIGetMyInvestments input = DIGetMyInvestments.builder()
                 .userId(userId)
                 .build();
-        return sGetMyInvestments.service(input);
+
+        List<DOGetMyInvestments> output = sGetMyInvestments.service(input);
+
+        return output;
     }
 
     @PostMapping("api/investment/my/investments")

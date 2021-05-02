@@ -16,14 +16,13 @@ public class SGetMyInvestments {
     
     @Transactional
     public List<DOGetMyInvestments> service(DIGetMyInvestments input) {
-        List<DOGetMyInvestments> output = new ArrayList<>();
-        
         // mapping input
-
+        
         // process
         List<EInvestment> founds = rInvestment.findByUserId(input.getUserId());
-
+        
         // mapping output
+        List<DOGetMyInvestments> output = new ArrayList<>();
         for(EInvestment value : founds) {
             DOGetMyInvestments data = DOGetMyInvestments.builder()
                     .productId(value.getProduct().getProductId())
