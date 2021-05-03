@@ -5,10 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kakaopay.investment.InvestmentApplicationTests;
 import com.kakaopay.investment.investment.DIGetMyInvestments;
+import com.kakaopay.investment.investment.DIInvest;
 import com.kakaopay.investment.investment.DOGetMyInvestments;
+import com.kakaopay.investment.investment.DOInvest;
 import com.kakaopay.investment.investment.SGetMyInvestments;
+import com.kakaopay.investment.investment.SInvest;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -31,8 +36,14 @@ public class CMyInvestmentTests extends InvestmentApplicationTests {
     @Autowired
     private MockMvc mockMvc;
     
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @MockBean
     private SGetMyInvestments sGetMyInvestments;
+
+    @MockBean
+    private SInvest sInvest;
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
@@ -41,29 +52,68 @@ public class CMyInvestmentTests extends InvestmentApplicationTests {
         /* given */
         String uri = "/api/investment/my/investments";
 
-        DIGetMyInvestments serviceInput = DIGetMyInvestments.builder()
-                                                            .userId(1L)
-                                                            .build();
-        DOGetMyInvestments data0 = DOGetMyInvestments.builder()
-                                                        .productId(1L)
-                                                        .productTitle("product")
-                                                        .totalInvestingAmount(1L)
-                                                        .InvestingAmount(1L)
-                                                        .investedAt(LocalDateTime.of(2000, 1, 1, 1, 1, 1, 1))
-                                                        .build();
-        List<DOGetMyInvestments> serviceOutput = new ArrayList<>();
-        serviceOutput.add(data0);
+        // DIGetMyInvestments dIGetMyInvestments = DIGetMyInvestments.builder()
+        //         .userId(1L)
+        //         .build();
+        // String dIGetMyInvestmentsStr = objectMapper.writeValueAsString(dIGetMyInvestments);
         
-        Mockito.doReturn(serviceOutput)
+        DOGetMyInvestments data0 = DOGetMyInvestments.builder()
+                .productId(1L)
+                .productTitle("product")
+                .totalInvestingAmount(1L)
+                .InvestingAmount(1L)
+                .investedAt(LocalDateTime.of(2000, 1, 1, 1, 1, 1, 1))
+                .build();
+        List<DOGetMyInvestments> dOGetMyInvestments = new ArrayList<>();
+        dOGetMyInvestments.add(data0);
+        String dOGetMyInvestmentsStr = objectMapper.writeValueAsString(dOGetMyInvestments);
+        
+        Mockito.doReturn(dOGetMyInvestments)
                 .when(sGetMyInvestments)
                 .service(Mockito.any());
 
         /* when */
-        ResultActions ra = mockMvc.perform(MockMvcRequestBuilders.get(uri).header("X-USER-ID", "1"));
+        ResultActions ra = mockMvc.perform(MockMvcRequestBuilders.get(uri)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("X-USER-ID", "1"));
         
         /* then */
         ra.andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("[{\"productId\":1,\"productTitle\":\"product\",\"totalInvestingAmount\":1,\"investedAt\":\"2000-01-01T01:01:01.000000001\",\"investingAmount\":1}]"))
+                .andExpect(MockMvcResultMatchers.content().string(dOGetMyInvestmentsStr))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
+    @DisplayName("CMyInvestmentTests: POST api/investment/my/investments")
+    public void post() throws Exception {
+        /* given */
+        String uri = "/api/investment/my/investments";
+
+        DIInvest dIInvest = DIInvest.builder()
+                .userId(1L)
+                .productId(1L)
+                .build();
+        String dIInvestStr = objectMapper.writeValueAsString(dIInvest);
+
+        DOInvest dOInvest = DOInvest.builder()
+                .message("POST")
+                .build();
+        String dOInvestStr = objectMapper.writeValueAsString(dOInvest);
+                                         
+        Mockito.doReturn(dOInvest)
+                .when(sInvest)
+                .service(Mockito.any());
+        
+        /* when */
+        ResultActions ra = mockMvc.perform(MockMvcRequestBuilders.post(uri)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("X-USER-ID", "1")
+                .content(dIInvestStr));
+
+        /* then */
+        ra.andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string(dOInvestStr))
                 .andDo(MockMvcResultHandlers.print());
     }
 }

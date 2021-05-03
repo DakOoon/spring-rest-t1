@@ -38,7 +38,10 @@ public class CMyInvestment {
     @PostMapping("api/investment/my/investments")
     public DOInvest invest(@RequestHeader(value = "X-USER-ID") Long userId, @RequestBody DIInvest input) {
         input.setUserId(userId);
-        return sInvest.service(input);
+        
+        DOInvest output = sInvest.service(input);
+        
+        return output;
     }
     
 }
