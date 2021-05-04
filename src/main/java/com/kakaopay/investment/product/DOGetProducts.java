@@ -1,5 +1,10 @@
 package com.kakaopay.investment.product;
 
+import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.kakaopay.investment.util.DateTimeUtils;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,6 +24,8 @@ public class DOGetProducts {
     private Long currentInvestingAmout;
     private Long investorCount;
     private String productState;
-    private String startedAt;
-    private String finishedAt;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DateTimeUtils.PATTERN)
+    private LocalDateTime startedAt;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DateTimeUtils.PATTERN)
+    private LocalDateTime finishedAt;
 }

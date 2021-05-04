@@ -8,7 +8,6 @@ import com.kakaopay.investment.product.ProductStateType;
 import com.kakaopay.investment.product.RProdcut;
 import com.kakaopay.investment.user.EUser;
 import com.kakaopay.investment.user.RUser;
-import com.kakaopay.investment.util.DateTimeUtils;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -94,12 +93,12 @@ public class SInvest {
             EInvestment result = rInvestment.save(investment);
     
             // mapping output
-            output.setTimestamp(DateTimeUtils.format(result.getInvestedAt()));
+            output.setTimestamp(result.getInvestedAt());
             output.setStatus("200");
             output.setMessage("성공");
 
         } catch(InvestmentException e) {
-            output.setTimestamp(DateTimeUtils.format(LocalDateTime.now()));
+            output.setTimestamp(LocalDateTime.now());
             output.setStatus(e.getStatus());
             output.setMessage(e.getMessage());
         }

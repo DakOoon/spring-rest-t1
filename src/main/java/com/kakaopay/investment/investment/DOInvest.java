@@ -1,5 +1,10 @@
 package com.kakaopay.investment.investment;
 
+import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.kakaopay.investment.util.DateTimeUtils;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +18,8 @@ import lombok.Setter;
 @Builder
 public class DOInvest {
     
-    private String timestamp;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DateTimeUtils.PATTERN)
+    private LocalDateTime timestamp;
     private String status;
     private String message;
 }

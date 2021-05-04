@@ -4,8 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.kakaopay.investment.util.DateTimeUtils;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +20,7 @@ public class SGetProducts {
         List<DOGetProducts> output = new ArrayList<>();
         
         // mapping input
-        String date = input.getDate() == null ?DateTimeUtils.format(LocalDateTime.now()) :input.getDate();
+        LocalDateTime date = input.getDate() == null ?LocalDateTime.now() :input.getDate();
         
         // process
         List<EProduct> found = rProduct.findByDate(date);
@@ -36,8 +34,8 @@ public class SGetProducts {
                     .currentInvestingAmout(value.getCurrentInvestingAmout())
                     .investorCount(value.getInvestorCount())
                     .productState(value.getProductState())
-                    .startedAt(DateTimeUtils.format(value.getStartedAt()))
-                    .finishedAt(DateTimeUtils.format(value.getFinishedAt()))
+                    .startedAt(value.getStartedAt())
+                    .finishedAt(value.getFinishedAt())
                     .build();
             output.add(data);
         }
