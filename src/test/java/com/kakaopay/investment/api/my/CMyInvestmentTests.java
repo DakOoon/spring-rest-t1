@@ -7,7 +7,6 @@ import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kakaopay.investment.InvestmentApplicationTests;
-import com.kakaopay.investment.investment.DIGetMyInvestments;
 import com.kakaopay.investment.investment.DIInvest;
 import com.kakaopay.investment.investment.DOGetMyInvestments;
 import com.kakaopay.investment.investment.DOInvest;
@@ -57,14 +56,14 @@ public class CMyInvestmentTests extends InvestmentApplicationTests {
         //         .build();
         // String dIGetMyInvestmentsStr = objectMapper.writeValueAsString(dIGetMyInvestments);
         
+        List<DOGetMyInvestments> dOGetMyInvestments = new ArrayList<>();
         DOGetMyInvestments data0 = DOGetMyInvestments.builder()
                 .productId(1L)
                 .productTitle("product")
                 .totalInvestingAmount(1L)
                 .InvestingAmount(1L)
-                .investedAt(LocalDateTime.of(2000, 1, 1, 1, 1, 1, 1))
+                .investedAt(LocalDateTime.now())
                 .build();
-        List<DOGetMyInvestments> dOGetMyInvestments = new ArrayList<>();
         dOGetMyInvestments.add(data0);
         String dOGetMyInvestmentsStr = objectMapper.writeValueAsString(dOGetMyInvestments);
         
