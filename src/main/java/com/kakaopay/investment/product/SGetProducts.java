@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SGetProducts {
     
-    private final RProdcut rProduct;
+    private final RProduct rProduct;
 
     @Transactional
     public List<DOGetProducts> service(DIGetProducts input) {

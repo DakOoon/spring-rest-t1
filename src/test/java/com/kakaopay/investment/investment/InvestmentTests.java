@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.kakaopay.investment.InvestmentApplicationTests;
 import com.kakaopay.investment.product.EProduct;
-import com.kakaopay.investment.product.RProdcut;
+import com.kakaopay.investment.product.RProduct;
 import com.kakaopay.investment.user.EUser;
 import com.kakaopay.investment.user.RUser;
 import com.kakaopay.investment.util.DateTimeUtils;
@@ -32,18 +32,18 @@ public class InvestmentTests extends InvestmentApplicationTests {
     private EUser eUser = EUser.builder().build();
 
     @Autowired
-    private RProdcut rProdcut;
+    private RProduct rProduct;
     private EProduct eProduct = EProduct.builder().build();
 
     @BeforeEach
     public void createRefer() {
         rUser.save(eUser);
-        rProdcut.save(eProduct);
+        rProduct.save(eProduct);
     }
 
     @AfterEach
     public void deleteRefer() {
-        rProdcut.delete(eProduct);
+        rProduct.delete(eProduct);
         rUser.delete(eUser);
     }
 

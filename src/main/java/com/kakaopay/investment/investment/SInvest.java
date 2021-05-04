@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.kakaopay.investment.product.EProduct;
 import com.kakaopay.investment.product.ProductStateType;
-import com.kakaopay.investment.product.RProdcut;
+import com.kakaopay.investment.product.RProduct;
 import com.kakaopay.investment.user.EUser;
 import com.kakaopay.investment.user.RUser;
 
@@ -34,7 +34,7 @@ public class SInvest {
     private static final long MIN_INVESTING_AMOUNT = 1000;
 
     private final RInvestment rInvestment;
-    private final RProdcut rProduct;
+    private final RProduct rProduct;
     private final RUser rUser;
     
     @Transactional
