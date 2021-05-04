@@ -1,5 +1,7 @@
 package com.kakaopay.investment.api.product;
 
+import java.util.List;
+
 import com.kakaopay.investment.product.DIGetProducts;
 import com.kakaopay.investment.product.DOGetProducts;
 import com.kakaopay.investment.product.SGetProducts;
@@ -17,7 +19,10 @@ public class CProducts {
     private final SGetProducts sGetProducts;
 
     @GetMapping("api/investment/products")
-    public Iterable<DOGetProducts> getProducts(@RequestBody DIGetProducts input) {
-        return sGetProducts.service(input);
+    public List<DOGetProducts> getProducts(@RequestBody DIGetProducts input) {
+
+        List<DOGetProducts> output = sGetProducts.service(input);
+
+        return output;
     }
 }
