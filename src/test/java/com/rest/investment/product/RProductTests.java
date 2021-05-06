@@ -19,14 +19,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class ProductTests extends InvestmentApplicationTests {
+public class RProductTests extends InvestmentApplicationTests {
     
     @Autowired
     private RProduct rProduct;
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("ProductTests: entity")
+    @DisplayName("RProductTests: entity")
     public void entity() {
         /* given */
         EProduct origin = EProduct.builder()
@@ -69,7 +69,7 @@ public class ProductTests extends InvestmentApplicationTests {
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("ProductTests: entityWithDefault")
+    @DisplayName("RProductTests: entityWithDefault")
     public void entityWithDefault() {
         /* given */
         EProduct origin = EProduct.builder()
@@ -105,7 +105,7 @@ public class ProductTests extends InvestmentApplicationTests {
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("ProductTests: findByDate")
+    @DisplayName("RProductTests: findByDate")
     public void findByDate() {
         /* given */
         EProduct data0 = EProduct.builder()
@@ -131,27 +131,20 @@ public class ProductTests extends InvestmentApplicationTests {
 
         /* when */
         List<EProduct> found0 = rProduct.findByDate(LocalDateTime.of(2000, 1, 1, 1, 1, 1, 1));
-        
-        List<EProduct> found1 = rProduct.findByDate(LocalDateTime.of(2000, 3, 3, 3, 3, 3, 3));
 
         /* then */
         assertEquals(2, found0.size());
         assertEquals(data0.getTitle(), found0.get(0).getTitle());
         assertEquals(data2.getTitle(), found0.get(1).getTitle());
         
+        /* when */
+        List<EProduct> found1 = rProduct.findByDate(LocalDateTime.of(2000, 3, 3, 3, 3, 3, 3));
+
+        /* then */
         assertEquals(2, found1.size());
         assertEquals(data1.getTitle(), found1.get(0).getTitle());
         assertEquals(data2.getTitle(), found1.get(1).getTitle());
 
         rProduct.deleteAll();
-    }
-
-    @Test
-    @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("ProductTests: SGetProducts")
-    public void SGetProducts() {
-        /* given */
-        /* when */
-        /* then */
     }
 }
