@@ -108,6 +108,7 @@ public class RProductTests extends InvestmentApplicationTests {
     @DisplayName("RProductTests: findByDate")
     public void findByDate() {
         /* given */
+        List<EProduct> data = new ArrayList<>();
         EProduct data0 = EProduct.builder()
                 .title("p1")
                 .startedAt(LocalDateTime.of(2000, 1, 1, 1, 1, 1, 1))
@@ -123,7 +124,6 @@ public class RProductTests extends InvestmentApplicationTests {
                 .startedAt(LocalDateTime.of(2000, 1, 1, 1, 1, 1, 1))
                 .finishedAt(LocalDateTime.of(2000, 4, 4, 4, 4, 4, 4))
                 .build();
-        List<EProduct> data = new ArrayList<>();
         data.add(data0);
         data.add(data1);
         data.add(data2);
