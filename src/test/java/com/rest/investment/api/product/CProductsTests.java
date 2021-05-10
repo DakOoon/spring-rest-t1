@@ -1,5 +1,6 @@
 package com.rest.investment.api.product;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -58,10 +59,7 @@ public class CProductsTests extends InvestmentApplicationTests{
 
         Mockito.doReturn(dOGetProducts)
                 .when(sGetProducts)
-                .service(Mockito.argThat(input -> 
-                        DateTimeUtils.format(dIGetProducts.getDate())
-                                .equals(DateTimeUtils.format(input.getDate()))
-                ));
+                .service(Mockito.argThat(input -> dIGetProducts.equals(input)));
 
         /* when */
         ResultActions ra = mockMvc.perform(MockMvcRequestBuilders.get(uri)
