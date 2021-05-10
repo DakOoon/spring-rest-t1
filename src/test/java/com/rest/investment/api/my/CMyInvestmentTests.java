@@ -102,7 +102,7 @@ public class CMyInvestmentTests extends InvestmentApplicationTests {
                                          
         Mockito.doReturn(dOInvest)
                 .when(sInvest)
-                .service(Mockito.any());
+                .service(Mockito.argThat(input -> dIInvest.equals(input)));
         
         /* when */
         ResultActions ra = mockMvc.perform(MockMvcRequestBuilders.post(uri)

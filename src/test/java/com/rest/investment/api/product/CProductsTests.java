@@ -9,6 +9,7 @@ import com.rest.investment.InvestmentApplicationTests;
 import com.rest.investment.product.DIGetProducts;
 import com.rest.investment.product.DOGetProducts;
 import com.rest.investment.product.SGetProducts;
+import com.rest.investment.util.DateTimeUtils;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -57,7 +58,10 @@ public class CProductsTests extends InvestmentApplicationTests{
 
         Mockito.doReturn(dOGetProducts)
                 .when(sGetProducts)
-                .service(Mockito.any());
+                .service(Mockito.argThat(input -> 
+                        DateTimeUtils.format(dIGetProducts.getDate())
+                                .equals(DateTimeUtils.format(input.getDate()))
+                ));
 
         /* when */
         ResultActions ra = mockMvc.perform(MockMvcRequestBuilders.get(uri)
