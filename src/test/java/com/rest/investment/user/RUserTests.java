@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class UserTests extends InvestmentApplicationTests {
+public class RUserTests extends InvestmentApplicationTests {
     
     @Autowired
     private RUser rUser;

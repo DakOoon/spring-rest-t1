@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class InvestmentTests extends InvestmentApplicationTests {
+public class RInvestmentTests extends InvestmentApplicationTests {
     
     @Autowired
     private RInvestment rInvestment;
