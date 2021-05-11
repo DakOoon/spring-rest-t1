@@ -1,6 +1,5 @@
 package com.rest.investment.api.product;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -10,7 +9,6 @@ import com.rest.investment.InvestmentApplicationTests;
 import com.rest.investment.product.DIGetProducts;
 import com.rest.investment.product.DOGetProducts;
 import com.rest.investment.product.SGetProducts;
-import com.rest.investment.util.DateTimeUtils;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
