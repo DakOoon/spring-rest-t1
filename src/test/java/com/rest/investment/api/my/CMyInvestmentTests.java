@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rest.investment.InvestmentApplicationTests;
+import com.rest.investment.investment.DIGetMyInvestments;
 import com.rest.investment.investment.DIInvest;
 import com.rest.investment.investment.DOGetMyInvestments;
 import com.rest.investment.investment.DOInvest;
@@ -51,10 +52,9 @@ public class CMyInvestmentTests extends InvestmentApplicationTests {
         /* given */
         String uri = "/api/investment/my/investments";
 
-        // DIGetMyInvestments dIGetMyInvestments = DIGetMyInvestments.builder()
-        //         .userId(1L)
-        //         .build();
-        // String dIGetMyInvestmentsStr = objectMapper.writeValueAsString(dIGetMyInvestments);
+        DIGetMyInvestments dIGetMyInvestments = DIGetMyInvestments.builder()
+                .userId(1L)
+                .build();
         
         List<DOGetMyInvestments> dOGetMyInvestments = new ArrayList<>();
         DOGetMyInvestments data0 = DOGetMyInvestments.builder()
@@ -69,7 +69,7 @@ public class CMyInvestmentTests extends InvestmentApplicationTests {
         
         Mockito.doReturn(dOGetMyInvestments)
                 .when(sGetMyInvestments)
-                .service(Mockito.any());
+                .service(Mockito.argThat(input -> dIGetMyInvestments.equals(input)));
 
         /* when */
         ResultActions ra = mockMvc.perform(MockMvcRequestBuilders.get(uri)
