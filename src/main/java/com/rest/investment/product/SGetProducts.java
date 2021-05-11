@@ -16,16 +16,15 @@ public class SGetProducts {
     private final RProduct rProduct;
 
     @Transactional
-    public List<DOGetProducts> service(DIGetProducts input) {
-        List<DOGetProducts> output = new ArrayList<>();
-        
+    public List<DOGetProducts> service(final DIGetProducts input) {
         // mapping input
-        LocalDateTime date = input.getDate() == null ?LocalDateTime.now() :input.getDate();
+        LocalDateTime date = input.getDate()==null ?LocalDateTime.now() :input.getDate();
         
         // process
         List<EProduct> found = rProduct.findByDate(date);
-
+        
         // mapping output
+        List<DOGetProducts> output = new ArrayList<>();
         for(EProduct value : found) {
             DOGetProducts data = DOGetProducts.builder()
                     .productId(value.getProductId())

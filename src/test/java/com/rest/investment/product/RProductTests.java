@@ -145,6 +145,6 @@ public class RProductTests extends InvestmentApplicationTests {
         assertEquals(data1.getTitle(), found1.get(0).getTitle());
         assertEquals(data2.getTitle(), found1.get(1).getTitle());
 
-        rProduct.deleteAll();
+        rProduct.deleteAll(data);
     }
 }

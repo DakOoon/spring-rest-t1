@@ -15,11 +15,12 @@ public class SGetMyInvestments {
     private final RInvestment rInvestment;
     
     @Transactional
-    public List<DOGetMyInvestments> service(DIGetMyInvestments input) {
+    public List<DOGetMyInvestments> service(final DIGetMyInvestments input) {
         // mapping input
-        
+        Long userId = input.getUserId()==null ?null :input.getUserId();
+
         // process
-        List<EInvestment> founds = rInvestment.findByUserId(input.getUserId());
+        List<EInvestment> founds = rInvestment.findByUserId(userId);
         
         // mapping output
         List<DOGetMyInvestments> output = new ArrayList<>();

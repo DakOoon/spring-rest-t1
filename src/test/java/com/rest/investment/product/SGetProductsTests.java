@@ -80,24 +80,24 @@ public class SGetProductsTests extends InvestmentApplicationTests {
                 .finishedAt(LocalDateTime.of(2099, 4, 4, 4, 4, 4, 4))
                 .build();
 
-        List<EProduct> testData1 = new ArrayList<>();
-        testData1.add(data0);
+        List<EProduct> data = new ArrayList<>();
+        data.add(data0);
         
-        Mockito.doReturn(testData1)
+        Mockito.doReturn(data)
                 .when(RProduct)
                 .findByDate(Mockito.argThat(input -> 
                         DateTimeUtils.format(date)
                                 .equals(DateTimeUtils.format(input))));
                 
         /* when */
-        DIGetProducts dIGetProducts1 = DIGetProducts.builder()
+        DIGetProducts dIGetProducts = DIGetProducts.builder()
                 .build();
-        List<DOGetProducts> dOGetProducts1 = sGetProducts.service(dIGetProducts1);
+        List<DOGetProducts> dOGetProducts = sGetProducts.service(dIGetProducts);
 
         /* then */
-        assertNotNull(dOGetProducts1);
-        assertEquals(1, dOGetProducts1.size());
-        assertEquals(data0.getProductId(), dOGetProducts1.get(0).getProductId());
-        assertEquals(data0.getTitle(), dOGetProducts1.get(0).getProductTitle());
+        assertNotNull(dOGetProducts);
+        assertEquals(1, dOGetProducts.size());
+        assertEquals(data0.getProductId(), dOGetProducts.get(0).getProductId());
+        assertEquals(data0.getTitle(), dOGetProducts.get(0).getProductTitle());
     }
 }
