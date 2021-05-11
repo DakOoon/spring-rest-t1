@@ -4,16 +4,15 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import lombok.RequiredArgsConstructor;
-
 @Service
-@RequiredArgsConstructor
 public class SGetProducts {
     
-    private final RProduct rProduct;
+    @Autowired
+    private RProduct rProduct;
 
     @Transactional
     public List<DOGetProducts> service(final DIGetProducts input) {
@@ -41,5 +40,4 @@ public class SGetProducts {
 
         return output;
     }
-    
 }
