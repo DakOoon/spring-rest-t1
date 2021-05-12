@@ -3,6 +3,9 @@ package com.rest.investment.investment;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.rest.investment.api.my.DIGetMyInvestments;
+import com.rest.investment.api.my.DOGetMyInvestments;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

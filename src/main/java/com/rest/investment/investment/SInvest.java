@@ -3,6 +3,8 @@ package com.rest.investment.investment;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+import com.rest.investment.api.my.DIInvest;
+import com.rest.investment.api.my.DOInvest;
 import com.rest.investment.product.EProduct;
 import com.rest.investment.product.ProductStateType;
 import com.rest.investment.product.RProduct;

@@ -2,10 +2,6 @@ package com.rest.investment.api.my;
 
 import java.util.List;
 
-import com.rest.investment.investment.DIGetMyInvestments;
-import com.rest.investment.investment.DIInvest;
-import com.rest.investment.investment.DOGetMyInvestments;
-import com.rest.investment.investment.DOInvest;
 import com.rest.investment.investment.SGetMyInvestments;
 import com.rest.investment.investment.SInvest;
 

@@ -1,4 +1,4 @@
-package com.rest.investment.product;
+package com.rest.investment.api.product;
 
 import java.time.LocalDateTime;
 

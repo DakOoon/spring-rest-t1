@@ -2,8 +2,6 @@ package com.rest.investment.api.product;
 
 import java.util.List;
 
-import com.rest.investment.product.DIGetProducts;
-import com.rest.investment.product.DOGetProducts;
 import com.rest.investment.product.SGetProducts;
 
 import org.springframework.validation.annotation.Validated;

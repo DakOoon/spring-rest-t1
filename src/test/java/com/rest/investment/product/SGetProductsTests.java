@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import com.rest.investment.InvestmentApplicationTests;
+import com.rest.investment.api.product.DIGetProducts;
+import com.rest.investment.api.product.DOGetProducts;
 import com.rest.investment.util.DateTimeUtils;
 
 import org.junit.jupiter.api.DisplayName;
@@ -86,8 +88,7 @@ public class SGetProductsTests extends InvestmentApplicationTests {
         Mockito.doReturn(data)
                 .when(RProduct)
                 .findByDate(Mockito.argThat(input -> 
-                        DateTimeUtils.format(date)
-                                .equals(DateTimeUtils.format(input))));
+                        DateTimeUtils.format(date).equals(DateTimeUtils.format(input))));
                 
         /* when */
         DIGetProducts dIGetProducts = DIGetProducts.builder()

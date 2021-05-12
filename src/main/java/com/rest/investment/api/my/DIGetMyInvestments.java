@@ -1,4 +1,4 @@
-package com.rest.investment.investment;
+package com.rest.investment.api.my;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

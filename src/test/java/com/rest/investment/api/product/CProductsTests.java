@@ -6,8 +6,6 @@ import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rest.investment.InvestmentApplicationTests;
-import com.rest.investment.product.DIGetProducts;
-import com.rest.investment.product.DOGetProducts;
 import com.rest.investment.product.SGetProducts;
 
 import org.junit.jupiter.api.DisplayName;
