@@ -49,7 +49,7 @@ public class RInvestmentTests extends InvestmentApplicationTests {
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("InvestmentTests: entity")
+    @DisplayName("RInvestmentTests: entity")
     public void entity() {
         /* given */
         EInvestment origin = EInvestment.builder()

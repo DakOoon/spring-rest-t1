@@ -30,7 +30,7 @@ public class SGetProductsTests extends InvestmentApplicationTests {
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("ProductTests: SGetProducts")
+    @DisplayName("SGetProductsTests: SGetProducts")
     public void SGetProducts() {
         /* given */
         LocalDateTime date = LocalDateTime.of(2000, 3, 3, 3, 3, 3, 3);
@@ -71,7 +71,7 @@ public class SGetProductsTests extends InvestmentApplicationTests {
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("ProductTests: SGetProductsWithDefault")
+    @DisplayName("SGetProductsTests: SGetProductsWithDefault")
     public void SGetProductsWithDefault() {
         /* given */
         LocalDateTime date = LocalDateTime.now();
