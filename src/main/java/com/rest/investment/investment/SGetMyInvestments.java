@@ -13,11 +13,12 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class SGetMyInvestments {
 
     private final RInvestment rInvestment;
     
-    @Transactional
+    @Transactional(readOnly = true)
     public List<DOGetMyInvestments> service(final DIGetMyInvestments input) {
         // mapping input
         Long userId = input.getUserId()==null ?null :input.getUserId();

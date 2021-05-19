@@ -14,11 +14,12 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class SGetProducts {
     
     private final RProduct rProduct;
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<DOGetProducts> service(final DIGetProducts input) {
         // mapping input
         LocalDateTime date = input.getDate()==null ?LocalDateTime.now() :input.getDate();
