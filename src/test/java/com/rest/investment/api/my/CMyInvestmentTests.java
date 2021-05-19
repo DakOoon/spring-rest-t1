@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rest.investment.InvestmentApplicationTests;
 import com.rest.investment.investment.SGetMyInvestments;
-import com.rest.investment.investment.SInvest;
+import com.rest.investment.investment.SPostMyInvestments;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,7 +39,7 @@ public class CMyInvestmentTests extends InvestmentApplicationTests {
     private SGetMyInvestments sGetMyInvestments;
 
     @MockBean
-    private SInvest sInvest;
+    private SPostMyInvestments sPostMyInvestments;
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
@@ -85,30 +85,31 @@ public class CMyInvestmentTests extends InvestmentApplicationTests {
         /* given */
         String uri = "/api/investment/my/investments";
 
-        DIInvest dIInvest = DIInvest.builder()
+        DIPostMyInvestments dIPostMyInvestments = DIPostMyInvestments.builder()
                 .userId(1L)
                 .productId(1L)
+                .investingAmount(3000L)
                 .build();
-        String dIInvestStr = objectMapper.writeValueAsString(dIInvest);
+        String dIPostMyInvestmentsStr = objectMapper.writeValueAsString(dIPostMyInvestments);
 
-        DOInvest dOInvest = DOInvest.builder()
+        DOPostMyInvestments dOPostMyInvestments = DOPostMyInvestments.builder()
                 .message("POST")
                 .build();
-        String dOInvestStr = objectMapper.writeValueAsString(dOInvest);
+        String dOPostMyInvestmentsStr = objectMapper.writeValueAsString(dOPostMyInvestments);
                                          
-        Mockito.doReturn(dOInvest)
-                .when(sInvest)
-                .service(Mockito.argThat(input -> dIInvest.equals(input)));
+        Mockito.doReturn(dOPostMyInvestments)
+                .when(sPostMyInvestments)
+                .service(Mockito.argThat(input -> dIPostMyInvestments.equals(input)));
         
         /* when */
         ResultActions ra = mockMvc.perform(MockMvcRequestBuilders.post(uri)
                 .contentType(MediaType.APPLICATION_JSON)
                 .header("X-USER-ID", "1")
-                .content(dIInvestStr));
+                .content(dIPostMyInvestmentsStr));
 
         /* then */
         ra.andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string(dOInvestStr))
+                .andExpect(MockMvcResultMatchers.content().string(dOPostMyInvestmentsStr))
                 .andDo(MockMvcResultHandlers.print());
     }
 }

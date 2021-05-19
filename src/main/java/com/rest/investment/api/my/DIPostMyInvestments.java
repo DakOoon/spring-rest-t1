@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class DIInvest {
+public class DIPostMyInvestments {
     
     private Long userId;
     private Long productId;

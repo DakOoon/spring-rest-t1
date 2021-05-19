@@ -3,7 +3,7 @@ package com.rest.investment.api.my;
 import java.util.List;
 
 import com.rest.investment.investment.SGetMyInvestments;
-import com.rest.investment.investment.SInvest;
+import com.rest.investment.investment.SPostMyInvestments;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 public class CMyInvestment {
     
     private final SGetMyInvestments sGetMyInvestments;
-    private final SInvest sInvest;
+    private final SPostMyInvestments sPostMyInvestments;
 
     @GetMapping("api/investment/my/investments")
     public List<DOGetMyInvestments> getMyInvestments(@RequestHeader(value = "X-USER-ID") Long userId) {
@@ -32,10 +32,10 @@ public class CMyInvestment {
     }
 
     @PostMapping("api/investment/my/investments")
-    public DOInvest invest(@RequestHeader(value = "X-USER-ID") Long userId, @RequestBody DIInvest input) {
+    public DOPostMyInvestments postMyInvestments(@RequestHeader(value = "X-USER-ID") Long userId, @RequestBody DIPostMyInvestments input) {
         input.setUserId(userId);
         
-        DOInvest output = sInvest.service(input);
+        DOPostMyInvestments output = sPostMyInvestments.service(input);
         
         return output;
     }
