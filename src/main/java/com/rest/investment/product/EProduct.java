@@ -58,11 +58,6 @@ public class EProduct {
     @Builder.Default
     private LocalDateTime finishedAt = LocalDateTime.now();
 
-    public void update(Long currencurrentInvestingAmount, Long investorCount) {
-        this.currentInvestingAmout = currencurrentInvestingAmount;
-        this.investorCount = investorCount;
-    }
-
     public void update(String productState) {
         this.productState = productState;
     }
