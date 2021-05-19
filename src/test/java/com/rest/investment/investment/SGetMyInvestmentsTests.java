@@ -29,8 +29,8 @@ public class SGetMyInvestmentsTests extends InvestmentApplicationTests {
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("SGetMyInvestmentsTests: SGetMyInvestments")
-    public void SGetMyInvestments() {
+    @DisplayName("SGetMyInvestmentsTests: success")
+    public void success() {
         /* given */
         Long userId = 33L;
 
@@ -70,8 +70,8 @@ public class SGetMyInvestmentsTests extends InvestmentApplicationTests {
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("SGetMyInvestmentsTests: SGetMyInvestmentsWithoutUserId")
-    public void SGetMyInvestmentsWithoutUserId() {
+    @DisplayName("SGetMyInvestmentsTests: withoutUserId")
+    public void withoutUserId() {
         /* given */
         Long userId = 33L;
 

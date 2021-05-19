@@ -23,15 +23,15 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 public class SGetProductsTests extends InvestmentApplicationTests {
 
     @MockBean
-    private RProduct RProduct;
+    private RProduct rProduct;
 
     @Autowired
     private SGetProducts sGetProducts;
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("SGetProductsTests: SGetProducts")
-    public void SGetProducts() {
+    @DisplayName("SGetProductsTests: success")
+    public void success() {
         /* given */
         LocalDateTime date = LocalDateTime.of(2000, 3, 3, 3, 3, 3, 3);
 
@@ -51,7 +51,7 @@ public class SGetProductsTests extends InvestmentApplicationTests {
         data.add(data1);
 
         Mockito.doReturn(data)
-                .when(RProduct)
+                .when(rProduct)
                 .findByDate(date);
                 
         /* when */
@@ -71,8 +71,8 @@ public class SGetProductsTests extends InvestmentApplicationTests {
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("SGetProductsTests: SGetProductsWithDefault")
-    public void SGetProductsWithDefault() {
+    @DisplayName("SGetProductsTests: withoutDate")
+    public void withoutDate() {
         /* given */
         LocalDateTime date = LocalDateTime.now();
 
@@ -86,7 +86,7 @@ public class SGetProductsTests extends InvestmentApplicationTests {
         data.add(data0);
         
         Mockito.doReturn(data)
-                .when(RProduct)
+                .when(rProduct)
                 .findByDate(Mockito.argThat(input -> 
                         DateTimeUtils.format(date).equals(DateTimeUtils.format(input))));
                 

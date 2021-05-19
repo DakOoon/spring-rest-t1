@@ -22,7 +22,7 @@ public class RUserTests extends InvestmentApplicationTests {
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("UserTests: entity")
+    @DisplayName("RUserTests: entity")
     public void entity() {
         /* given */
         EUser origin = EUser.builder()
