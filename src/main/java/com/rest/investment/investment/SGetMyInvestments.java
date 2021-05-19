@@ -29,6 +29,7 @@ public class SGetMyInvestments {
         List<DOGetMyInvestments> output = new ArrayList<>();
         for(EInvestment value : founds) {
             DOGetMyInvestments data = DOGetMyInvestments.builder()
+                    .investmentId(value.getInvestmentId())
                     .productId(value.getProduct().getProductId())
                     .productTitle(value.getProduct().getTitle())
                     .totalInvestingAmount(value.getProduct().getTotalInvestingAmount())

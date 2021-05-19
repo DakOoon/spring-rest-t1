@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class DOGetMyInvestments {
     
+    private Long investmentId;
     private Long productId;
     private String productTitle;
     private Long totalInvestingAmount;
