@@ -8,9 +8,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface RInvestment extends JpaRepository<EInvestment, Long> {
     
-    @Query(value = "SELECT * FROM INVESTMENT WHERE user_id = :user_id", nativeQuery = true)
-    List<EInvestment> findByUserId(@Param("user_id") Long userId);
-
-    @Query(value = "SELECT * FROM INVESTMENT WHERE user_id = :user_id", nativeQuery = true)
-    List<EInvestment> invest(@Param("user_id") Long userId);
+    @Query(value = "SELECT ei FROM EInvestment ei WHERE ei.user.userId = :userId")
+    List<EInvestment> findByUserId(@Param("userId") Long userId);
 }
