@@ -125,20 +125,23 @@ public class RProductTests extends InvestmentApplicationTests {
                 .build();
         rProduct.saveAll(Arrays.asList(data0, data1, data2));
 
-        /* when */
-        List<EProduct> found0 = rProduct.findByDate(LocalDateTime.of(2000, 1, 1, 1, 1, 1, 1));
+        {
+            /* when */
+            List<EProduct> found = rProduct.findByDate(LocalDateTime.of(2000, 1, 1, 1, 1, 1, 1));
 
-        /* then */
-        assertEquals(2, found0.size());
-        assertEquals(data0.getTitle(), found0.get(0).getTitle());
-        assertEquals(data2.getTitle(), found0.get(1).getTitle());
-        
-        /* when */
-        List<EProduct> found1 = rProduct.findByDate(LocalDateTime.of(2000, 3, 3, 3, 3, 3, 3));
+            /* then */
+            assertEquals(2, found.size());
+            assertEquals(data0.getTitle(), found.get(0).getTitle());
+            assertEquals(data2.getTitle(), found.get(1).getTitle());
+        }
+        {
+            /* when */
+            List<EProduct> found = rProduct.findByDate(LocalDateTime.of(2000, 3, 3, 3, 3, 3, 3));
 
-        /* then */
-        assertEquals(2, found1.size());
-        assertEquals(data1.getTitle(), found1.get(0).getTitle());
-        assertEquals(data2.getTitle(), found1.get(1).getTitle());
+            /* then */
+            assertEquals(2, found.size());
+            assertEquals(data1.getTitle(), found.get(0).getTitle());
+            assertEquals(data2.getTitle(), found.get(1).getTitle());
+        }
     }
 }

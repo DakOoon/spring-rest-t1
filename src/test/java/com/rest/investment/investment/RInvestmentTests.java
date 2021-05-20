@@ -91,66 +91,66 @@ public class RInvestmentTests extends InvestmentApplicationTests {
                 .build();
         EUser uData2 = EUser.builder()
                 .build();
-        List<EUser> uSaved = rUser.saveAll(Arrays.asList(uData0, uData1, uData2));
+        rUser.saveAll(Arrays.asList(uData0, uData1, uData2));
         
         EInvestment iData0 = EInvestment.builder()
-                .user(uSaved.get(0))
+                .user(uData0)
                 .product(pData0)
                 .investingAmount(10L)
                 .build();
         EInvestment iData1 = EInvestment.builder()
-                .user(uSaved.get(1))
+                .user(uData1)
                 .product(pData0)
                 .investingAmount(10L)
                 .build();
         EInvestment iData2 = EInvestment.builder()
-                .user(uSaved.get(0))
+                .user(uData0)
                 .product(pData0)
                 .investingAmount(10L)
                 .build();
         EInvestment iData3 = EInvestment.builder()
-                .user(uSaved.get(1))
+                .user(uData1)
                 .product(pData0)
                 .investingAmount(10L)
                 .build();
         EInvestment iData4 = EInvestment.builder()
-                .user(uSaved.get(1))
+                .user(uData1)
                 .product(pData0)
                 .investingAmount(10L)
                 .build();
         EInvestment iData5 = EInvestment.builder()
-                .user(uSaved.get(2))
+                .user(uData2)
                 .product(pData0)
                 .investingAmount(10L)
                 .build();
-        List<EInvestment> iSaved = rInvestment.saveAll(Arrays.asList(iData0, iData1, iData2, iData3, iData4, iData5));
+        rInvestment.saveAll(Arrays.asList(iData0, iData1, iData2, iData3, iData4, iData5));
         
         {
             /* when */
-            Long userId = uSaved.get(0).getUserId();
+            Long userId = uData0.getUserId();
             List<EInvestment> found = rInvestment.findByUserId(userId);
 
             /* then */
             assertNotNull(found);
             assertEquals(2, found.size());
-            assertEquals(iSaved.get(0).getInvestmentId(), found.get(0).getInvestmentId());
+            assertEquals(iData0.getInvestmentId(), found.get(0).getInvestmentId());
             assertEquals(userId, found.get(0).getUser().getUserId());
-            assertEquals(iSaved.get(2).getInvestmentId(), found.get(1).getInvestmentId());
+            assertEquals(iData2.getInvestmentId(), found.get(1).getInvestmentId());
             assertEquals(userId, found.get(1).getUser().getUserId());
         }
         {
             /* when */
-            Long userId = uSaved.get(1).getUserId();
+            Long userId = uData1.getUserId();
             List<EInvestment> found = rInvestment.findByUserId(userId);
             
             /* then */
             assertNotNull(found);
             assertEquals(3, found.size());
-            assertEquals(iSaved.get(1).getInvestmentId(), found.get(0).getInvestmentId());
+            assertEquals(iData1.getInvestmentId(), found.get(0).getInvestmentId());
             assertEquals(userId, found.get(0).getUser().getUserId());
-            assertEquals(iSaved.get(3).getInvestmentId(), found.get(1).getInvestmentId());
+            assertEquals(iData3.getInvestmentId(), found.get(1).getInvestmentId());
             assertEquals(userId, found.get(1).getUser().getUserId());
-            assertEquals(iSaved.get(4).getInvestmentId(), found.get(2).getInvestmentId());
+            assertEquals(iData4.getInvestmentId(), found.get(2).getInvestmentId());
             assertEquals(userId, found.get(2).getUser().getUserId());
         }
     }

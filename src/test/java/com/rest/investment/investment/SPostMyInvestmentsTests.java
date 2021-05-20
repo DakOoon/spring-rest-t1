@@ -45,8 +45,8 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
     @DisplayName("SPostMyInvestmentsTests: success")
     public void success() {
         /* given */
-        Long userId = 1L;
-        Long productId = 1L;
+        Long userId = 10L;
+        Long productId = 10L;
         Long investingAmount = 5000L;
 
         EUser uData0 = EUser.builder()
@@ -78,11 +78,12 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
 
         Mockito.doReturn(iData0)
                 .when(rInvestment)
-                .save(Mockito.argThat(input -> {
-                    return uData0.getUserId().equals(input.getUser().getUserId()) &&
-                            pData0.getProductId().equals(input.getProduct().getProductId()) &&
-                            iData0.getInvestingAmount().equals(input.getInvestingAmount());
-                }));
+                .save(Mockito.argThat(
+                        input -> {
+                            return uData0.getUserId().equals(input.getUser().getUserId())
+                                    && pData0.getProductId().equals(input.getProduct().getProductId())
+                                    && iData0.getInvestingAmount().equals(input.getInvestingAmount());
+                        }));
                 
         /* when */
         DIPostMyInvestments dIPostMyInvestments = DIPostMyInvestments.builder()
@@ -96,6 +97,7 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
         assertNotNull(dOPostMyInvestments);
         assertEquals("200", dOPostMyInvestments.getStatus());
         assertEquals("성공", dOPostMyInvestments.getMessage());
+        verify(rInvestment, times(1)).save(any());
         verify(rProduct, times(0)).save(any());
     }
     
@@ -209,11 +211,12 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
 
         Mockito.doReturn(iData0)
                 .when(rInvestment)
-                .save(Mockito.argThat(input -> {
-                    return uData0.getUserId().equals(input.getUser().getUserId()) &&
-                            pData0.getProductId().equals(input.getProduct().getProductId()) &&
-                            iData0.getInvestingAmount().equals(input.getInvestingAmount());
-                }));
+                .save(Mockito.argThat(
+                        input -> {
+                            return uData0.getUserId().equals(input.getUser().getUserId())
+                                    && pData0.getProductId().equals(input.getProduct().getProductId())
+                                    && iData0.getInvestingAmount().equals(input.getInvestingAmount());
+                        }));
 
         /* when */
         DIPostMyInvestments dIPostMyInvestments = DIPostMyInvestments.builder()
@@ -227,6 +230,7 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
         assertNotNull(dOPostMyInvestments);
         assertEquals("400", dOPostMyInvestments.getStatus());
         assertEquals("최소 투자금액은 "+SPostMyInvestments.MIN_INVESTING_AMOUNT+"원 입니다.", dOPostMyInvestments.getMessage());
+        verify(rInvestment, times(0)).save(any());
         verify(rProduct, times(0)).save(any());
     }
     
@@ -271,11 +275,12 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
 
         Mockito.doReturn(iData0)
                 .when(rInvestment)
-                .save(Mockito.argThat(input -> {
-                    return uData0.getUserId().equals(input.getUser().getUserId()) &&
-                            pData0.getProductId().equals(input.getProduct().getProductId()) &&
-                            iData0.getInvestingAmount().equals(input.getInvestingAmount());
-                }));
+                .save(Mockito.argThat(
+                        input -> {
+                            return uData0.getUserId().equals(input.getUser().getUserId())
+                                    && pData0.getProductId().equals(input.getProduct().getProductId())
+                                    && iData0.getInvestingAmount().equals(input.getInvestingAmount());
+                        }));
 
         /* when */
         DIPostMyInvestments dIPostMyInvestments = DIPostMyInvestments.builder()
@@ -289,6 +294,7 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
         assertNotNull(dOPostMyInvestments);
         assertEquals("200", dOPostMyInvestments.getStatus());
         assertEquals("성공", dOPostMyInvestments.getMessage());
+        verify(rInvestment, times(1)).save(any());
         verify(rProduct, times(0)).save(any());
     }
     
@@ -333,11 +339,12 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
 
         Mockito.doReturn(iData0)
                 .when(rInvestment)
-                .save(Mockito.argThat(input -> {
-                    return uData0.getUserId().equals(input.getUser().getUserId()) &&
-                            pData0.getProductId().equals(input.getProduct().getProductId()) &&
-                            iData0.getInvestingAmount().equals(input.getInvestingAmount());
-                }));
+                .save(Mockito.argThat(
+                        input -> {
+                            return uData0.getUserId().equals(input.getUser().getUserId())
+                                    && pData0.getProductId().equals(input.getProduct().getProductId())
+                                    && iData0.getInvestingAmount().equals(input.getInvestingAmount());
+                        }));
 
         /* when */
         DIPostMyInvestments dIPostMyInvestments = DIPostMyInvestments.builder()
@@ -351,6 +358,7 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
         assertNotNull(dOPostMyInvestments);
         assertEquals("200", dOPostMyInvestments.getStatus());
         assertEquals("성공", dOPostMyInvestments.getMessage());
+        verify(rInvestment, times(1)).save(any());
         verify(rProduct, times(0)).save(any());
     }
     
@@ -395,11 +403,12 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
 
         Mockito.doReturn(iData0)
                 .when(rInvestment)
-                .save(Mockito.argThat(input -> {
-                    return uData0.getUserId().equals(input.getUser().getUserId()) &&
-                            pData0.getProductId().equals(input.getProduct().getProductId()) &&
-                            iData0.getInvestingAmount().equals(input.getInvestingAmount());
-                }));
+                .save(Mockito.argThat(
+                        input -> {
+                            return uData0.getUserId().equals(input.getUser().getUserId())
+                                    && pData0.getProductId().equals(input.getProduct().getProductId())
+                                    && iData0.getInvestingAmount().equals(input.getInvestingAmount());
+                        }));
 
         /* when */
         DIPostMyInvestments dIPostMyInvestments = DIPostMyInvestments.builder()
@@ -413,10 +422,10 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
         assertNotNull(dOPostMyInvestments);
         assertEquals("200", dOPostMyInvestments.getStatus());
         assertEquals("성공", dOPostMyInvestments.getMessage());
+        verify(rInvestment, times(1)).save(any());
         verify(rProduct, times(1)).save(any());
         verify(rProduct, times(1)).save(Mockito.argThat(input -> 
-            ProductStateType.CLOSED.value().equals(input.getProductState())
-        ));
+                ProductStateType.CLOSED.value().equals(input.getProductState())));
     }
     
     @Test
@@ -460,11 +469,12 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
 
         Mockito.doReturn(iData0)
                 .when(rInvestment)
-                .save(Mockito.argThat(input -> {
-                    return uData0.getUserId().equals(input.getUser().getUserId()) &&
-                            pData0.getProductId().equals(input.getProduct().getProductId()) &&
-                            iData0.getInvestingAmount().equals(input.getInvestingAmount());
-                }));
+                .save(Mockito.argThat(
+                        input -> {
+                            return uData0.getUserId().equals(input.getUser().getUserId())
+                                    && pData0.getProductId().equals(input.getProduct().getProductId())
+                                    && iData0.getInvestingAmount().equals(input.getInvestingAmount());
+                        }));
 
         /* when */
         DIPostMyInvestments dIPostMyInvestments = DIPostMyInvestments.builder()
@@ -478,10 +488,10 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
         assertNotNull(dOPostMyInvestments);
         assertEquals("200", dOPostMyInvestments.getStatus());
         assertEquals("성공", dOPostMyInvestments.getMessage());
+        verify(rInvestment, times(1)).save(any());
         verify(rProduct, times(1)).save(any());
         verify(rProduct, times(1)).save(Mockito.argThat(input -> 
-            ProductStateType.CLOSED.value().equals(input.getProductState())
-        ));
+                ProductStateType.CLOSED.value().equals(input.getProductState())));
     }
     
     @Test
@@ -525,11 +535,12 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
 
         Mockito.doReturn(iData0)
                 .when(rInvestment)
-                .save(Mockito.argThat(input -> {
-                    return uData0.getUserId().equals(input.getUser().getUserId()) &&
-                            pData0.getProductId().equals(input.getProduct().getProductId()) &&
-                            iData0.getInvestingAmount().equals(input.getInvestingAmount());
-                }));
+                .save(Mockito.argThat(
+                        input -> {
+                            return uData0.getUserId().equals(input.getUser().getUserId())
+                                    && pData0.getProductId().equals(input.getProduct().getProductId())
+                                    && iData0.getInvestingAmount().equals(input.getInvestingAmount());
+                        }));
 
         /* when */
         DIPostMyInvestments dIPostMyInvestments = DIPostMyInvestments.builder()
@@ -543,6 +554,7 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
         assertNotNull(dOPostMyInvestments);
         assertEquals("400", dOPostMyInvestments.getStatus());
         assertEquals("투자금액이 너무 큽니다.", dOPostMyInvestments.getMessage());
+        verify(rInvestment, times(0)).save(any());
         verify(rProduct, times(0)).save(any());
     }
     
@@ -585,11 +597,12 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
 
         Mockito.doReturn(iData0)
                 .when(rInvestment)
-                .save(Mockito.argThat(input -> {
-                    return uData0.getUserId().equals(input.getUser().getUserId()) &&
-                            pData0.getProductId().equals(input.getProduct().getProductId()) &&
-                            iData0.getInvestingAmount().equals(input.getInvestingAmount());
-                }));
+                .save(Mockito.argThat(
+                        input -> {
+                            return uData0.getUserId().equals(input.getUser().getUserId())
+                                    && pData0.getProductId().equals(input.getProduct().getProductId())
+                                    && iData0.getInvestingAmount().equals(input.getInvestingAmount());
+                        }));
                 
         /* when */
         DIPostMyInvestments dIPostMyInvestments = DIPostMyInvestments.builder()
@@ -603,6 +616,8 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
         assertNotNull(dOPostMyInvestments);
         assertEquals("400", dOPostMyInvestments.getStatus());
         assertEquals("사용자를 찾을 수 없습니다.", dOPostMyInvestments.getMessage());
+        verify(rInvestment, times(0)).save(any());
+        verify(rProduct, times(0)).save(any());
     }
     
     @Test
@@ -645,11 +660,12 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
 
             Mockito.doReturn(iData0)
                     .when(rInvestment)
-                    .save(Mockito.argThat(input -> {
-                        return uData0.getUserId().equals(input.getUser().getUserId()) &&
-                                pData0.getProductId().equals(input.getProduct().getProductId()) &&
-                                iData0.getInvestingAmount().equals(input.getInvestingAmount());
-                    }));
+                    .save(Mockito.argThat(
+                            input -> {
+                                return uData0.getUserId().equals(input.getUser().getUserId())
+                                        && pData0.getProductId().equals(input.getProduct().getProductId())
+                                        && iData0.getInvestingAmount().equals(input.getInvestingAmount());
+                            }));
                     
             /* when */
             DIPostMyInvestments dIPostMyInvestments = DIPostMyInvestments.builder()
@@ -663,6 +679,8 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
             assertNotNull(dOPostMyInvestments);
             assertEquals("400", dOPostMyInvestments.getStatus());
             assertEquals("투자상품을 찾을 수 없습니다.", dOPostMyInvestments.getMessage());
+            verify(rInvestment, times(0)).save(any());
+            verify(rProduct, times(0)).save(any());
         }
         {
             /* given */
@@ -687,11 +705,12 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
 
             Mockito.doReturn(iData0)
                     .when(rInvestment)
-                    .save(Mockito.argThat(input -> {
-                        return uData0.getUserId().equals(input.getUser().getUserId()) &&
-                                pData0.getProductId().equals(input.getProduct().getProductId()) &&
-                                iData0.getInvestingAmount().equals(input.getInvestingAmount());
-                    }));
+                    .save(Mockito.argThat(
+                            input -> {
+                                return uData0.getUserId().equals(input.getUser().getUserId())
+                                        && pData0.getProductId().equals(input.getProduct().getProductId())
+                                        && iData0.getInvestingAmount().equals(input.getInvestingAmount());
+                            }));
                     
             /* when */
             DIPostMyInvestments dIPostMyInvestments = DIPostMyInvestments.builder()
@@ -705,6 +724,8 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
             assertNotNull(dOPostMyInvestments);
             assertEquals("400", dOPostMyInvestments.getStatus());
             assertEquals("마감된 투자상품입니다.", dOPostMyInvestments.getMessage());
+            verify(rInvestment, times(0)).save(any());
+            verify(rProduct, times(0)).save(any());
         }
     }
 }

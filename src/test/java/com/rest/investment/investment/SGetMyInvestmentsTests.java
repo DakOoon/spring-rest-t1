@@ -36,10 +36,11 @@ public class SGetMyInvestmentsTests extends InvestmentApplicationTests {
 
         EProduct pData0 = EProduct.builder()
                 .build();
+        EProduct pData1 = EProduct.builder()
+                .build();
+                
         EInvestment iData0 = EInvestment.builder()
                 .product(pData0)
-                .build();
-        EProduct pData1 = EProduct.builder()
                 .build();
         EInvestment iData1 = EInvestment.builder()
                 .product(pData1)
