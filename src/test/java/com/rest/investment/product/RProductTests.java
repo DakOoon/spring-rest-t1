@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
@@ -108,7 +108,6 @@ public class RProductTests extends InvestmentApplicationTests {
     @DisplayName("RProductTests: findByDate")
     public void findByDate() {
         /* given */
-        List<EProduct> data = new ArrayList<>();
         EProduct data0 = EProduct.builder()
                 .title("p1")
                 .startedAt(LocalDateTime.of(2000, 1, 1, 1, 1, 1, 1))
@@ -124,10 +123,7 @@ public class RProductTests extends InvestmentApplicationTests {
                 .startedAt(LocalDateTime.of(2000, 1, 1, 1, 1, 1, 1))
                 .finishedAt(LocalDateTime.of(2000, 4, 4, 4, 4, 4, 4))
                 .build();
-        data.add(data0);
-        data.add(data1);
-        data.add(data2);
-        rProduct.saveAll(data);
+        rProduct.saveAll(Arrays.asList(data0, data1, data2));
 
         /* when */
         List<EProduct> found0 = rProduct.findByDate(LocalDateTime.of(2000, 1, 1, 1, 1, 1, 1));
@@ -144,7 +140,5 @@ public class RProductTests extends InvestmentApplicationTests {
         assertEquals(2, found1.size());
         assertEquals(data1.getTitle(), found1.get(0).getTitle());
         assertEquals(data2.getTitle(), found1.get(1).getTitle());
-
-        rProduct.deleteAll(data);
     }
 }
