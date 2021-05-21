@@ -1,4 +1,4 @@
-package com.rest.investment.api.my;
+package com.rest.investment.api.unit.my;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -6,7 +6,11 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rest.investment.InvestmentApplicationTests;
+import com.rest.investment.api.my.DIGetMyInvestments;
+import com.rest.investment.api.my.DIPostMyInvestments;
+import com.rest.investment.api.my.DOGetMyInvestments;
+import com.rest.investment.api.my.DOPostMyInvestments;
+import com.rest.investment.api.unit.UnitTests;
 import com.rest.investment.investment.SGetMyInvestments;
 import com.rest.investment.investment.SPostMyInvestments;
 
@@ -15,8 +19,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -25,9 +27,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureMockMvc
-public class CMyInvestmentTests extends InvestmentApplicationTests {
+public class CMyInvestmentTests extends UnitTests {
 
     @Autowired
     private MockMvc mockMvc;

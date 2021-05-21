@@ -61,8 +61,8 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
                 .productId(productId)
                 .totalInvestingAmount(10000L)
                 .productState(ProductStateType.OPEN.value())
-                .startedAt(LocalDateTime.of(2000, 3, 3, 3, 3, 3, 3))
-                .finishedAt(LocalDateTime.of(2099, 3, 3, 3, 3, 3, 3))
+                .startedAt(LocalDateTime.of(2000, 3, 3, 3, 3, 3))
+                .finishedAt(LocalDateTime.of(2099, 3, 3, 3, 3, 3))
                 .build();
 
         Mockito.doReturn(Optional.of(pData0))
@@ -194,8 +194,8 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
                 .totalInvestingAmount(totalInvestingAmount)
                 .currentInvestingAmout(currentInvestingAmout)
                 .productState(ProductStateType.OPEN.value())
-                .startedAt(LocalDateTime.of(2000, 3, 3, 3, 3, 3, 3))
-                .finishedAt(LocalDateTime.of(2099, 3, 3, 3, 3, 3, 3))
+                .startedAt(LocalDateTime.of(2000, 3, 3, 3, 3, 3))
+                .finishedAt(LocalDateTime.of(2099, 3, 3, 3, 3, 3))
                 .build();
 
         Mockito.doReturn(Optional.of(pData0))
@@ -258,8 +258,8 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
                 .totalInvestingAmount(totalInvestingAmount)
                 .currentInvestingAmout(currentInvestingAmout)
                 .productState(ProductStateType.OPEN.value())
-                .startedAt(LocalDateTime.of(2000, 3, 3, 3, 3, 3, 3))
-                .finishedAt(LocalDateTime.of(2099, 3, 3, 3, 3, 3, 3))
+                .startedAt(LocalDateTime.of(2000, 3, 3, 3, 3, 3))
+                .finishedAt(LocalDateTime.of(2099, 3, 3, 3, 3, 3))
                 .build();
 
         Mockito.doReturn(Optional.of(pData0))
@@ -322,8 +322,8 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
                 .totalInvestingAmount(totalInvestingAmount)
                 .currentInvestingAmout(currentInvestingAmout)
                 .productState(ProductStateType.OPEN.value())
-                .startedAt(LocalDateTime.of(2000, 3, 3, 3, 3, 3, 3))
-                .finishedAt(LocalDateTime.of(2099, 3, 3, 3, 3, 3, 3))
+                .startedAt(LocalDateTime.of(2000, 3, 3, 3, 3, 3))
+                .finishedAt(LocalDateTime.of(2099, 3, 3, 3, 3, 3))
                 .build();
 
         Mockito.doReturn(Optional.of(pData0))
@@ -386,8 +386,8 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
                 .totalInvestingAmount(totalInvestingAmount)
                 .currentInvestingAmout(currentInvestingAmout)
                 .productState(ProductStateType.OPEN.value())
-                .startedAt(LocalDateTime.of(2000, 3, 3, 3, 3, 3, 3))
-                .finishedAt(LocalDateTime.of(2099, 3, 3, 3, 3, 3, 3))
+                .startedAt(LocalDateTime.of(2000, 3, 3, 3, 3, 3))
+                .finishedAt(LocalDateTime.of(2099, 3, 3, 3, 3, 3))
                 .build();
 
         Mockito.doReturn(Optional.of(pData0))
@@ -452,8 +452,8 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
                 .totalInvestingAmount(totalInvestingAmount)
                 .currentInvestingAmout(currentInvestingAmout)
                 .productState(ProductStateType.OPEN.value())
-                .startedAt(LocalDateTime.of(2000, 3, 3, 3, 3, 3, 3))
-                .finishedAt(LocalDateTime.of(2099, 3, 3, 3, 3, 3, 3))
+                .startedAt(LocalDateTime.of(2000, 3, 3, 3, 3, 3))
+                .finishedAt(LocalDateTime.of(2099, 3, 3, 3, 3, 3))
                 .build();
 
         Mockito.doReturn(Optional.of(pData0))
@@ -518,8 +518,8 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
                 .totalInvestingAmount(totalInvestingAmount)
                 .currentInvestingAmout(currentInvestingAmout)
                 .productState(ProductStateType.OPEN.value())
-                .startedAt(LocalDateTime.of(2000, 3, 3, 3, 3, 3, 3))
-                .finishedAt(LocalDateTime.of(2099, 3, 3, 3, 3, 3, 3))
+                .startedAt(LocalDateTime.of(2000, 3, 3, 3, 3, 3))
+                .finishedAt(LocalDateTime.of(2099, 3, 3, 3, 3, 3))
                 .build();
 
         Mockito.doReturn(Optional.of(pData0))
@@ -580,8 +580,8 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
                 .productId(productId)
                 .totalInvestingAmount(10000L)
                 .productState(ProductStateType.OPEN.value())
-                .startedAt(LocalDateTime.of(2000, 3, 3, 3, 3, 3, 3))
-                .finishedAt(LocalDateTime.of(2099, 3, 3, 3, 3, 3, 3))
+                .startedAt(LocalDateTime.of(2000, 3, 3, 3, 3, 3))
+                .finishedAt(LocalDateTime.of(2099, 3, 3, 3, 3, 3))
                 .build();
 
         Mockito.doReturn(Optional.of(pData0))
@@ -642,8 +642,8 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
                     .productId(productId)
                     .totalInvestingAmount(10000L)
                     .productState(ProductStateType.OPEN.value())
-                    .startedAt(LocalDateTime.of(2000, 3, 3, 3, 3, 3, 3))
-                    .finishedAt(LocalDateTime.of(2099, 3, 3, 3, 3, 3, 3))
+                    .startedAt(LocalDateTime.of(2000, 3, 3, 3, 3, 3))
+                    .finishedAt(LocalDateTime.of(2099, 3, 3, 3, 3, 3))
                     .build();
 
             // The product doesn't exist
@@ -688,8 +688,8 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
             EProduct pData0 = EProduct.builder()
                     .productId(productId)
                     .totalInvestingAmount(10000L)
-                    .startedAt(LocalDateTime.of(2000, 3, 3, 3, 3, 3, 3))
-                    .finishedAt(LocalDateTime.of(2099, 3, 3, 3, 3, 3, 3))
+                    .startedAt(LocalDateTime.of(2000, 3, 3, 3, 3, 3))
+                    .finishedAt(LocalDateTime.of(2099, 3, 3, 3, 3, 3))
                     .build();
 
             Mockito.doReturn(Optional.of(pData0))

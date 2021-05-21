@@ -33,17 +33,17 @@ public class SGetProductsTests extends InvestmentApplicationTests {
     @DisplayName("SGetProductsTests: success")
     public void success() {
         /* given */
-        LocalDateTime date = LocalDateTime.of(2000, 3, 3, 3, 3, 3, 3);
+        LocalDateTime date = LocalDateTime.of(2000, 3, 3, 3, 3, 3);
 
         EProduct data0 = EProduct.builder()
                 .title("p0")
-                .startedAt(LocalDateTime.of(2000, 3, 3, 3, 3, 3, 3))
-                .finishedAt(LocalDateTime.of(2000, 4, 4, 4, 4, 4, 4))
+                .startedAt(LocalDateTime.of(2000, 3, 3, 3, 3, 3))
+                .finishedAt(LocalDateTime.of(2000, 4, 4, 4, 4, 4))
                 .build();
         EProduct data1 = EProduct.builder()
                 .title("p1")
-                .startedAt(LocalDateTime.of(2000, 1, 1, 1, 1, 1, 1))
-                .finishedAt(LocalDateTime.of(2000, 4, 4, 4, 4, 4, 4))
+                .startedAt(LocalDateTime.of(2000, 1, 1, 1, 1, 1))
+                .finishedAt(LocalDateTime.of(2000, 4, 4, 4, 4, 4))
                 .build();
 
         List<EProduct> data = new ArrayList<>();
@@ -78,8 +78,8 @@ public class SGetProductsTests extends InvestmentApplicationTests {
 
         EProduct data0 = EProduct.builder()
                 .title("p0")
-                .startedAt(LocalDateTime.of(2000, 3, 3, 3, 3, 3, 3))
-                .finishedAt(LocalDateTime.of(2099, 4, 4, 4, 4, 4, 4))
+                .startedAt(LocalDateTime.of(2000, 3, 3, 3, 3, 3))
+                .finishedAt(LocalDateTime.of(2099, 4, 4, 4, 4, 4))
                 .build();
 
         List<EProduct> data = new ArrayList<>();

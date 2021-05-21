@@ -35,8 +35,8 @@ public class RProductTests extends InvestmentApplicationTests {
                 .currentInvestingAmout(5L)
                 .investorCount(3L)
                 .productState(ProductStateType.OPEN.value())
-                .startedAt(LocalDateTime.of(2000, 1, 1, 1, 1, 1, 1))
-                .finishedAt(LocalDateTime.of(2000, 1, 1, 1, 1, 1, 1))
+                .startedAt(LocalDateTime.of(2000, 1, 1, 1, 1, 1))
+                .finishedAt(LocalDateTime.of(2000, 1, 1, 1, 1, 1))
                 .build();
                 
         /* when */
@@ -110,24 +110,24 @@ public class RProductTests extends InvestmentApplicationTests {
         /* given */
         EProduct data0 = EProduct.builder()
                 .title("p1")
-                .startedAt(LocalDateTime.of(2000, 1, 1, 1, 1, 1, 1))
-                .finishedAt(LocalDateTime.of(2000, 2, 2, 2, 2, 2, 2))
+                .startedAt(LocalDateTime.of(2000, 1, 1, 1, 1, 1))
+                .finishedAt(LocalDateTime.of(2000, 2, 2, 2, 2, 2))
                 .build();
         EProduct data1 = EProduct.builder()
                 .title("p2")
-                .startedAt(LocalDateTime.of(2000, 3, 3, 3, 3, 3, 3))
-                .finishedAt(LocalDateTime.of(2000, 4, 4, 4, 4, 4, 4))
+                .startedAt(LocalDateTime.of(2000, 3, 3, 3, 3, 3))
+                .finishedAt(LocalDateTime.of(2000, 4, 4, 4, 4, 4))
                 .build();
         EProduct data2 = EProduct.builder()
                 .title("p3")
-                .startedAt(LocalDateTime.of(2000, 1, 1, 1, 1, 1, 1))
-                .finishedAt(LocalDateTime.of(2000, 4, 4, 4, 4, 4, 4))
+                .startedAt(LocalDateTime.of(2000, 1, 1, 1, 1, 1))
+                .finishedAt(LocalDateTime.of(2000, 4, 4, 4, 4, 4))
                 .build();
         rProduct.saveAll(Arrays.asList(data0, data1, data2));
 
         {
             /* when */
-            List<EProduct> found = rProduct.findByDate(LocalDateTime.of(2000, 1, 1, 1, 1, 1, 1));
+            List<EProduct> found = rProduct.findByDate(LocalDateTime.of(2000, 1, 1, 1, 1, 1));
 
             /* then */
             assertEquals(2, found.size());
@@ -136,7 +136,7 @@ public class RProductTests extends InvestmentApplicationTests {
         }
         {
             /* when */
-            List<EProduct> found = rProduct.findByDate(LocalDateTime.of(2000, 3, 3, 3, 3, 3, 3));
+            List<EProduct> found = rProduct.findByDate(LocalDateTime.of(2000, 3, 3, 3, 3, 3));
 
             /* then */
             assertEquals(2, found.size());
