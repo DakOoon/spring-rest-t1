@@ -46,7 +46,7 @@ public class EInvestment {
     @Column(name = "investing_amount", nullable = false)
     private Long investingAmount;
 
-    @Column(name = "invested_at", nullable = false)
+    @Column(name = "invested_at", updatable = false, nullable = false)
     @CreationTimestamp
     private LocalDateTime investedAt;
 }

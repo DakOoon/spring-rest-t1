@@ -1,6 +1,5 @@
 package com.rest.investment.investment;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 import com.rest.investment.api.my.DIPostMyInvestments;
@@ -42,7 +41,8 @@ public class SPostMyInvestments {
     
     @Transactional
     public DOPostMyInvestments service(DIPostMyInvestments input) {
-        DOPostMyInvestments output = DOPostMyInvestments.builder().build();
+        DOPostMyInvestments output = DOPostMyInvestments.builder()
+                .build();
 
         try {
             // mapping input
@@ -63,9 +63,9 @@ public class SPostMyInvestments {
             if(!user.isPresent()) {
                 throw new InvestmentException("사용자를 찾을 수 없습니다.");
             }
-    
+
             // read PRODUCT
-            Optional<EProduct> product = rProduct.findById(input.getProductId());
+            Optional<EProduct> product = rProduct.findById(productId);
             if(!product.isPresent()) {
                 throw new InvestmentException("투자상품을 찾을 수 없습니다.");
             }
@@ -96,14 +96,17 @@ public class SPostMyInvestments {
                     .investingAmount(invAmt)
                     .build();
             EInvestment result = rInvestment.save(investment);
-    
+            // flush() for @CreationTimestamp
+            // The result can be null when use saveAndFlush() instead of save()
+            rInvestment.flush();
+
             // mapping output
             output.setTimestamp(result.getInvestedAt());
             output.setStatus("200");
             output.setMessage("성공");
 
         } catch(InvestmentException e) {
-            output.setTimestamp(LocalDateTime.now());
+            output.setTimestamp(null);
             output.setStatus(e.getStatus());
             output.setMessage(e.getDescription());
         }

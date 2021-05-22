@@ -5,6 +5,7 @@ import java.util.List;
 import com.rest.investment.investment.SGetMyInvestments;
 import com.rest.investment.investment.SPostMyInvestments;
 
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,9 +33,11 @@ public class CMyInvestment {
     }
 
     @PostMapping("api/investment/my/investments")
-    public DOPostMyInvestments postMyInvestments(@RequestHeader(value = "X-USER-ID") Long userId, @RequestBody DIPostMyInvestments input) {
-        input.setUserId(userId);
-        
+    public DOPostMyInvestments postMyInvestments(@RequestHeader(value = "X-USER-ID", required = false) Long userId, 
+            @RequestBody @Validated final DIPostMyInvestments input) {
+        if(userId != null) {
+            input.setUserId(userId);
+        }
         DOPostMyInvestments output = sPostMyInvestments.service(input);
         
         return output;
