@@ -1,9 +1,7 @@
 package com.rest.investment.api.integrated.product;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -26,6 +24,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.test.web.reactive.server.WebTestClient.ResponseSpec;
 
 public class CProductsTests extends IntegratedTests {
+
     @Autowired
     private WebTestClient webTestClient;
 
@@ -51,8 +50,6 @@ public class CProductsTests extends IntegratedTests {
                 .date(LocalDateTime.of(2033, 1, 1, 1, 1, 1))
                 .build();
         String dIGetProductsStr = objectMapper.writeValueAsString(dIGetProducts);
-
-        String dOGetProductsStr = "[]";
         
         /* when */
         ResponseSpec rs = webTestClient.method(HttpMethod.GET)
@@ -60,8 +57,10 @@ public class CProductsTests extends IntegratedTests {
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(dIGetProductsStr)
                 .exchange();
-                
+        
         /* then */
+        String dOGetProductsStr = "[]";
+
         rs.expectStatus().isOk()
                 .expectBody().json(dOGetProductsStr);
     }
@@ -93,20 +92,6 @@ public class CProductsTests extends IntegratedTests {
                 .date(LocalDateTime.of(2015, 1, 1, 1, 1, 1))
                 .build();
         String dIGetProductsStr = objectMapper.writeValueAsString(dIGetProducts);
-
-        DOGetProducts data1 = DOGetProducts.builder()
-                .productId(pData1.getProductId())
-                .productTitle(pData1.getTitle())
-                .totalInvestingAmount(pData1.getTotalInvestingAmount())
-                .currentInvestingAmout(pData1.getCurrentInvestingAmout())
-                .investorCount(pData1.getInvestorCount())
-                .productState(pData1.getProductState())
-                .startedAt(pData1.getStartedAt())
-                .finishedAt(pData1.getFinishedAt())
-                .build();
-        List<DOGetProducts> dOGetProducts = new ArrayList<>();
-        dOGetProducts.add(data1);
-        String dOGetProductsStr = objectMapper.writeValueAsString(dOGetProducts);
         
         /* when */
         ResponseSpec rs = webTestClient.method(HttpMethod.GET)
@@ -116,6 +101,18 @@ public class CProductsTests extends IntegratedTests {
                 .exchange();
                 
         /* then */
+        DOGetProducts data0 = DOGetProducts.builder()
+                .productId(pData1.getProductId())
+                .productTitle(pData1.getTitle())
+                .totalInvestingAmount(pData1.getTotalInvestingAmount())
+                .currentInvestingAmout(pData1.getCurrentInvestingAmout())
+                .investorCount(pData1.getInvestorCount())
+                .productState(pData1.getProductState())
+                .startedAt(pData1.getStartedAt())
+                .finishedAt(pData1.getFinishedAt())
+                .build();
+        String dOGetProductsStr = objectMapper.writeValueAsString(Arrays.asList(data0));
+
         rs.expectStatus().isOk()
                 .expectBody().json(dOGetProductsStr);
     }
@@ -155,6 +152,14 @@ public class CProductsTests extends IntegratedTests {
                 .build();
         String dIGetProductsStr = objectMapper.writeValueAsString(dIGetProducts);
         
+        /* when */
+        ResponseSpec rs = webTestClient.method(HttpMethod.GET)
+                .uri(uri)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(dIGetProductsStr)
+                .exchange();
+                
+        /* then */
         DOGetProducts data0 = DOGetProducts.builder()
                 .productId(pData0.getProductId())
                 .productTitle(pData0.getTitle())
@@ -175,19 +180,8 @@ public class CProductsTests extends IntegratedTests {
                 .startedAt(pData1.getStartedAt())
                 .finishedAt(pData1.getFinishedAt())
                 .build();
-        List<DOGetProducts> dOGetProducts = new ArrayList<>();
-        dOGetProducts.add(data0);
-        dOGetProducts.add(data1);
-        String dOGetProductsStr = objectMapper.writeValueAsString(dOGetProducts);
-        
-        /* when */
-        ResponseSpec rs = webTestClient.method(HttpMethod.GET)
-                .uri(uri)
-                .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(dIGetProductsStr)
-                .exchange();
-                
-        /* then */
+        String dOGetProductsStr = objectMapper.writeValueAsString(Arrays.asList(data0, data1));
+
         rs.expectStatus().isOk()
                 .expectBody().json(dOGetProductsStr);
     }
