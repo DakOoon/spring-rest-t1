@@ -12,8 +12,13 @@ import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 import com.rest.investment.InvestmentApplicationTests;
+import com.rest.investment.investment.EInvestment;
+import com.rest.investment.investment.RInvestment;
+import com.rest.investment.user.EUser;
+import com.rest.investment.user.RUser;
 import com.rest.investment.util.DateTimeUtils;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
@@ -22,7 +27,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class RProductTests extends InvestmentApplicationTests {
     
     @Autowired
+    private RInvestment rInvestment;
+
+    @Autowired
     private RProduct rProduct;
+
+    @Autowired
+    private RUser rUser;
+
+    @BeforeEach
+    public void delete() {
+        rInvestment.deleteAll();
+        rProduct.deleteAll();
+        rUser.deleteAll();
+    }
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
@@ -79,9 +97,6 @@ public class RProductTests extends InvestmentApplicationTests {
         EProduct saved = rProduct.save(origin);
         
         Optional<EProduct> found = rProduct.findById(origin.getProductId());
-        
-        rProduct.deleteById(origin.getProductId());
-        Optional<EProduct> deleted = rProduct.findById(origin.getProductId());
                 
         /* then */
         assertNotNull(saved);
@@ -89,18 +104,85 @@ public class RProductTests extends InvestmentApplicationTests {
         assertTrue(found.isPresent());
         EProduct found0 = found.get();
         assertEquals(origin.getProductId(), found0.getProductId());
-        assertEquals(origin.getTitle(), found0.getTitle());
+        assertEquals(null, found0.getTitle());
         assertEquals(0L, found0.getTotalInvestingAmount());
         assertEquals(0L, found0.getCurrentInvestingAmout());
         assertEquals(0L, found0.getInvestorCount());
         assertEquals(ProductStateType.CLOSED.value(), found0.getProductState());
-        assertEquals(DateTimeUtils.format(origin.getStartedAt())
+        assertEquals(DateTimeUtils.format(LocalDateTime.now())
                 , DateTimeUtils.format(found0.getStartedAt()));
-        assertEquals(DateTimeUtils.format(origin.getFinishedAt())
+        assertEquals(DateTimeUtils.format(LocalDateTime.now())
                 , DateTimeUtils.format(found0.getFinishedAt()));
-                
-        assertNotNull(deleted);
-        assertFalse(deleted.isPresent());
+    }
+
+    @Test
+    @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
+    @DisplayName("RProductTests: formula")
+    public void formula() {
+        /* given */
+        Long totalInvestingAmount = 5000L;
+        Long firstInvestingAmount = 2000L;
+        Long secondInvestingAmount = 1000L;
+
+        EUser uData0 = EUser.builder()
+                .build();
+        rUser.save(uData0);
+        
+        EProduct pData0 = EProduct.builder()
+                .totalInvestingAmount(totalInvestingAmount)
+                .build();
+        rProduct.save(pData0);
+
+        {
+            /* when */
+            Optional<EProduct> found = rProduct.findById(pData0.getProductId());
+                        
+            /* then */
+            assertTrue(found.isPresent());
+            EProduct found0 = found.get();
+            assertEquals(pData0.getProductId(), found0.getProductId());
+            assertEquals(totalInvestingAmount, found0.getTotalInvestingAmount());
+            assertEquals(0L, found0.getCurrentInvestingAmout());
+            assertEquals(0L, found0.getInvestorCount());
+        }
+        {
+            /* when */
+            EInvestment iData0 = EInvestment.builder()
+                .user(uData0)
+                .product(pData0)
+                .investingAmount(firstInvestingAmount)
+                .build();
+            rInvestment.save(iData0);
+            
+            Optional<EProduct> found = rProduct.findById(pData0.getProductId());
+                            
+            /* then */
+            assertTrue(found.isPresent());
+            EProduct found0 = found.get();
+            assertEquals(pData0.getProductId(), found0.getProductId());
+            assertEquals(totalInvestingAmount, found0.getTotalInvestingAmount());
+            assertEquals(firstInvestingAmount, found0.getCurrentInvestingAmout());
+            assertEquals(1L, found0.getInvestorCount());
+        }
+        {
+            /* when */
+            EInvestment iData0 = EInvestment.builder()
+                .user(uData0)
+                .product(pData0)
+                .investingAmount(secondInvestingAmount)
+                .build();
+            rInvestment.save(iData0);
+            
+            Optional<EProduct> found = rProduct.findById(pData0.getProductId());
+                            
+            /* then */
+            assertTrue(found.isPresent());
+            EProduct found0 = found.get();
+            assertEquals(pData0.getProductId(), found0.getProductId());
+            assertEquals(totalInvestingAmount, found0.getTotalInvestingAmount());
+            assertEquals(firstInvestingAmount + secondInvestingAmount, found0.getCurrentInvestingAmout());
+            assertEquals(2L, found0.getInvestorCount());
+        }
     }
 
     @Test

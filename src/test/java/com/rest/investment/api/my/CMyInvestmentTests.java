@@ -1,4 +1,4 @@
-package com.rest.investment.api.unit.my;
+package com.rest.investment.api.my;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import com.rest.investment.api.my.DIGetMyInvestments;
 import com.rest.investment.api.my.DIPostMyInvestments;
 import com.rest.investment.api.my.DOGetMyInvestments;
 import com.rest.investment.api.my.DOPostMyInvestments;
-import com.rest.investment.api.unit.UnitTests;
+import com.rest.investment.api.UnitTests;
 import com.rest.investment.investment.SGetMyInvestments;
 import com.rest.investment.investment.SPostMyInvestments;
 
@@ -43,13 +43,14 @@ public class CMyInvestmentTests extends UnitTests {
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("CMyInvestmentTests: GET api/investment/my/investments")
+    @DisplayName("CMyInvestmentTests: get")
     public void get() throws Exception {
         /* given */
         String uri = "/api/investment/my/investments";
+        Long userId = 10L;
 
         DIGetMyInvestments dIGetMyInvestments = DIGetMyInvestments.builder()
-                .userId(1L)
+                .userId(userId)
                 .build();
         
         List<DOGetMyInvestments> dOGetMyInvestments = new ArrayList<>();
@@ -70,7 +71,7 @@ public class CMyInvestmentTests extends UnitTests {
         /* when */
         ResultActions ra = mockMvc.perform(MockMvcRequestBuilders.get(uri)
                 .contentType(MediaType.APPLICATION_JSON)
-                .header("X-USER-ID", "1"));
+                .header("X-USER-ID", userId));
         
         /* then */
         ra.andExpect(MockMvcResultMatchers.status().isOk())
@@ -80,13 +81,14 @@ public class CMyInvestmentTests extends UnitTests {
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("CMyInvestmentTests: POST api/investment/my/investments")
+    @DisplayName("CMyInvestmentTests: post")
     public void post() throws Exception {
         /* given */
         String uri = "/api/investment/my/investments";
+        Long userId = 10L;
 
         DIPostMyInvestments dIPostMyInvestments = DIPostMyInvestments.builder()
-                .userId(1L)
+                .userId(userId)
                 .productId(1L)
                 .investingAmount(3000L)
                 .build();
@@ -104,7 +106,48 @@ public class CMyInvestmentTests extends UnitTests {
         /* when */
         ResultActions ra = mockMvc.perform(MockMvcRequestBuilders.post(uri)
                 .contentType(MediaType.APPLICATION_JSON)
-                .header("X-USER-ID", "1")
+                .content(dIPostMyInvestmentsStr));
+
+        /* then */
+        ra.andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string(dOPostMyInvestmentsStr))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
+    @DisplayName("CMyInvestmentTests: postWithHeader")
+    public void postWithHeader() throws Exception {
+        /* given */
+        String uri = "/api/investment/my/investments";
+        Long userId = 10L;
+
+        DIPostMyInvestments dIPostMyInvestments = DIPostMyInvestments.builder()
+                .productId(1L)
+                .investingAmount(3000L)
+                .build();
+        String dIPostMyInvestmentsStr = objectMapper.writeValueAsString(dIPostMyInvestments);
+
+        DOPostMyInvestments dOPostMyInvestments = DOPostMyInvestments.builder()
+                .message("POST")
+                .build();
+        String dOPostMyInvestmentsStr = objectMapper.writeValueAsString(dOPostMyInvestments);
+                                         
+        Mockito.doReturn(dOPostMyInvestments)
+                .when(sPostMyInvestments)
+                .service(Mockito.argThat(
+                        input -> {
+                            if(dIPostMyInvestments.getUserId() == null) {
+                                dIPostMyInvestments.setUserId(userId);
+                                return dIPostMyInvestments.equals(input);
+                            }
+                            return false;
+                        }));
+        
+        /* when */
+        ResultActions ra = mockMvc.perform(MockMvcRequestBuilders.post(uri)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("X-USER-ID", userId)
                 .content(dIPostMyInvestmentsStr));
 
         /* then */

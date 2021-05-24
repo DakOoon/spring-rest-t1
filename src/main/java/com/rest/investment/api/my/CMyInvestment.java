@@ -22,7 +22,7 @@ public class CMyInvestment {
     private final SPostMyInvestments sPostMyInvestments;
 
     @GetMapping("api/investment/my/investments")
-    public List<DOGetMyInvestments> getMyInvestments(@RequestHeader(value = "X-USER-ID") Long userId) {
+    public List<DOGetMyInvestments> getMyInvestments(@RequestHeader(value = "X-USER-ID") final Long userId) {
         DIGetMyInvestments input = DIGetMyInvestments.builder()
                 .userId(userId)
                 .build();
@@ -33,7 +33,7 @@ public class CMyInvestment {
     }
 
     @PostMapping("api/investment/my/investments")
-    public DOPostMyInvestments postMyInvestments(@RequestHeader(value = "X-USER-ID", required = false) Long userId, 
+    public DOPostMyInvestments postMyInvestments(@RequestHeader(value = "X-USER-ID", required = false) final Long userId, 
             @RequestBody @Validated final DIPostMyInvestments input) {
         if(userId != null) {
             input.setUserId(userId);

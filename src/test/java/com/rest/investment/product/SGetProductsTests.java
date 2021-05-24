@@ -37,13 +37,9 @@ public class SGetProductsTests extends InvestmentApplicationTests {
 
         EProduct data0 = EProduct.builder()
                 .title("p0")
-                .startedAt(LocalDateTime.of(2000, 3, 3, 3, 3, 3))
-                .finishedAt(LocalDateTime.of(2000, 4, 4, 4, 4, 4))
                 .build();
         EProduct data1 = EProduct.builder()
                 .title("p1")
-                .startedAt(LocalDateTime.of(2000, 1, 1, 1, 1, 1))
-                .finishedAt(LocalDateTime.of(2000, 4, 4, 4, 4, 4))
                 .build();
 
         List<EProduct> data = new ArrayList<>();
@@ -74,12 +70,10 @@ public class SGetProductsTests extends InvestmentApplicationTests {
     @DisplayName("SGetProductsTests: withoutDate")
     public void withoutDate() {
         /* given */
-        LocalDateTime date = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now();
 
         EProduct data0 = EProduct.builder()
                 .title("p0")
-                .startedAt(LocalDateTime.of(2000, 3, 3, 3, 3, 3))
-                .finishedAt(LocalDateTime.of(2099, 4, 4, 4, 4, 4))
                 .build();
 
         List<EProduct> data = new ArrayList<>();
@@ -88,7 +82,7 @@ public class SGetProductsTests extends InvestmentApplicationTests {
         Mockito.doReturn(data)
                 .when(rProduct)
                 .findByDate(Mockito.argThat(input -> 
-                        DateTimeUtils.format(date).equals(DateTimeUtils.format(input))));
+                        DateTimeUtils.format(now).equals(DateTimeUtils.format(input))));
                 
         /* when */
         DIGetProducts dIGetProducts = DIGetProducts.builder()

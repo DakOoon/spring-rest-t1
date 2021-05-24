@@ -17,6 +17,7 @@ import com.rest.investment.user.EUser;
 import com.rest.investment.user.RUser;
 import com.rest.investment.util.DateTimeUtils;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
@@ -26,13 +27,20 @@ public class RInvestmentTests extends InvestmentApplicationTests {
     
     @Autowired
     private RInvestment rInvestment;
+    
+    @Autowired
+    private RProduct rProduct;
 
     @Autowired
     private RUser rUser;
 
-    @Autowired
-    private RProduct rProduct;
-
+    @BeforeEach
+    public void delete() {
+        rInvestment.deleteAll();
+        rProduct.deleteAll();
+        rUser.deleteAll();
+    }
+    
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
     @DisplayName("RInvestmentTests: entity")

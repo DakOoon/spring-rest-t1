@@ -1,5 +1,6 @@
-package com.rest.investment.api.unit.product;
+package com.rest.investment.api.product;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -7,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rest.investment.api.product.DIGetProducts;
 import com.rest.investment.api.product.DOGetProducts;
-import com.rest.investment.api.unit.UnitTests;
+import com.rest.investment.api.UnitTests;
 import com.rest.investment.product.SGetProducts;
 
 import org.junit.jupiter.api.DisplayName;
@@ -36,17 +37,19 @@ public class CProductsTests extends UnitTests {
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("CProductsTests: GET api/investment/products")
+    @DisplayName("CProductsTests: get")
     public void get() throws Exception {
         /* given */
         String uri = "/api/investment/products";
 
         DIGetProducts dIGetProducts = DIGetProducts.builder()
+                .date(LocalDateTime.now())
                 .build();
         String dIGetProductsStr = objectMapper.writeValueAsString(dIGetProducts);
 
         List<DOGetProducts> dOGetProducts = new ArrayList<>();
         DOGetProducts data0 = DOGetProducts.builder()
+                .productTitle("product")
                 .build();
         dOGetProducts.add(data0);
         String dOGetProductsStr = objectMapper.writeValueAsString(dOGetProducts);

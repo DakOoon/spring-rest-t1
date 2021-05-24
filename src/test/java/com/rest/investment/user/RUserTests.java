@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.rest.investment.InvestmentApplicationTests;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
@@ -19,6 +20,11 @@ public class RUserTests extends InvestmentApplicationTests {
     
     @Autowired
     private RUser rUser;
+
+    @BeforeEach
+    public void delete() {
+        rUser.deleteAll();
+    }
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)

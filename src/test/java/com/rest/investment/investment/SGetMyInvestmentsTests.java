@@ -3,7 +3,7 @@ package com.rest.investment.investment;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -46,11 +46,7 @@ public class SGetMyInvestmentsTests extends InvestmentApplicationTests {
                 .product(pData1)
                 .build();
         
-        List<EInvestment> data = new ArrayList<>();
-        data.add(iData0);
-        data.add(iData1);
-
-        Mockito.doReturn(data)
+        Mockito.doReturn(Arrays.asList(iData0, iData1))
                 .when(rInvestment)
                 .findByUserId(userId);
         
@@ -74,20 +70,9 @@ public class SGetMyInvestmentsTests extends InvestmentApplicationTests {
     @DisplayName("SGetMyInvestmentsTests: withoutUserId")
     public void withoutUserId() {
         /* given */
-        Long userId = 33L;
-
-        EInvestment data0 = EInvestment.builder()
-                .build();
-        EInvestment data1 = EInvestment.builder()
-                .build();
-        
-        List<EInvestment> data = new ArrayList<>();
-        data.add(data0);
-        data.add(data1);
-
-        Mockito.doReturn(data)
+        Mockito.doReturn(Arrays.asList())
                 .when(rInvestment)
-                .findByUserId(userId);
+                .findByUserId(null);
         
         /* when */
         DIGetMyInvestments dIGetMyInvestments = DIGetMyInvestments.builder()

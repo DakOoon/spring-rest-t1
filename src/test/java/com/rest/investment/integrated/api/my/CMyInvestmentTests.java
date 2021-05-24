@@ -1,4 +1,4 @@
-package com.rest.investment.api.integrated.my;
+package com.rest.investment.integrated.api.my;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rest.investment.api.integrated.IntegratedTests;
+import com.rest.investment.integrated.IntegratedTests;
 import com.rest.investment.api.my.DIPostMyInvestments;
 import com.rest.investment.api.my.DOGetMyInvestments;
 import com.rest.investment.api.my.DOPostMyInvestments;
@@ -47,7 +47,7 @@ public class CMyInvestmentTests extends IntegratedTests {
     private RInvestment rInvestment;
 
     @BeforeEach
-    public void product() {
+    public void delete() {
         rInvestment.deleteAll();
         rProduct.deleteAll();
         rUser.deleteAll();
@@ -55,7 +55,7 @@ public class CMyInvestmentTests extends IntegratedTests {
     
     @Test
     @Timeout(value = 3000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("CMyInvestmentTests: get api/investment/my/investments")
+    @DisplayName("CMyInvestmentTests: get")
     public void get() throws JsonProcessingException {
         /* given */
         String uri = "api/investment/my/investments";
