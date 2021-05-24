@@ -17,12 +17,16 @@ import com.rest.investment.user.EUser;
 import com.rest.investment.user.RUser;
 import com.rest.investment.util.DateTimeUtils;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.Timeout;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class RInvestmentTests extends InvestmentApplicationTests {
     
     @Autowired
@@ -34,8 +38,15 @@ public class RInvestmentTests extends InvestmentApplicationTests {
     @Autowired
     private RUser rUser;
 
+    @AfterAll
+    public void afterAll() {
+        rInvestment.deleteAll();
+        rProduct.deleteAll();
+        rUser.deleteAll();
+    }
+
     @BeforeEach
-    public void delete() {
+    public void beforeEach() {
         rInvestment.deleteAll();
         rProduct.deleteAll();
         rUser.deleteAll();
@@ -43,7 +54,7 @@ public class RInvestmentTests extends InvestmentApplicationTests {
     
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("RInvestmentTests: entity")
+    @DisplayName("entity")
     public void entity() {
         /* given */
         EUser uData0 = EUser.builder()
@@ -86,7 +97,7 @@ public class RInvestmentTests extends InvestmentApplicationTests {
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("RInvestmentTests: findByUserId")
+    @DisplayName("findByUserId")
     public void findByUserId() {
         /* given */
         EProduct pData0 = EProduct.builder()

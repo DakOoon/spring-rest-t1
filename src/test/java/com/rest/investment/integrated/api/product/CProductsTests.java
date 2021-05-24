@@ -13,16 +13,20 @@ import com.rest.investment.product.EProduct;
 import com.rest.investment.product.ProductStateType;
 import com.rest.investment.product.RProduct;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.Timeout;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.test.web.reactive.server.WebTestClient.ResponseSpec;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class CProductsTests extends IntegratedTests {
 
     @Autowired
@@ -34,14 +38,19 @@ public class CProductsTests extends IntegratedTests {
     @Autowired
     private RProduct rProduct;
 
+    @AfterAll
+    public void afterAll() {
+        rProduct.deleteAll();
+    }
+
     @BeforeEach
-    public void delete() {
+    public void beforeEach() {
         rProduct.deleteAll();
     }
 
     @Test
     @Timeout(value = 3000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("CProductsTests: getNone")
+    @DisplayName("getNone")
     public void getNone() throws JsonProcessingException {
         /* given */
         String uri = "/api/investment/products";
@@ -84,7 +93,7 @@ public class CProductsTests extends IntegratedTests {
 
     @Test
     @Timeout(value = 3000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("CProductsTests: getOne")
+    @DisplayName("getOne")
     public void getOne() throws JsonProcessingException {
         /* given */
         String uri = "/api/investment/products";
@@ -137,7 +146,7 @@ public class CProductsTests extends IntegratedTests {
 
     @Test
     @Timeout(value = 3000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("CProductsTests: getMany")
+    @DisplayName("getMany")
     public void getMany() throws JsonProcessingException {
         /* given */
         String uri = "/api/investment/products";
@@ -207,7 +216,7 @@ public class CProductsTests extends IntegratedTests {
 
     @Test
     @Timeout(value = 3000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("CProductsTests: getWithoutDate")
+    @DisplayName("getWithoutDate")
     public void getWithoutDate() throws JsonProcessingException {
         /* given */
         String uri = "/api/investment/products";

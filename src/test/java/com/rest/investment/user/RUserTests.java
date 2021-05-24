@@ -10,25 +10,34 @@ import java.util.concurrent.TimeUnit;
 
 import com.rest.investment.InvestmentApplicationTests;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.Timeout;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class RUserTests extends InvestmentApplicationTests {
     
     @Autowired
     private RUser rUser;
 
+    @AfterAll
+    public void afterAll() {
+        rUser.deleteAll();
+    }
+
     @BeforeEach
-    public void delete() {
+    public void beforeEach() {
         rUser.deleteAll();
     }
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("RUserTests: entity")
+    @DisplayName("entity")
     public void entity() {
         /* given */
         EUser origin = EUser.builder()

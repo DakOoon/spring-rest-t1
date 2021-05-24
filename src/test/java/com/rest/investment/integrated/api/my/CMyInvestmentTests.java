@@ -18,10 +18,13 @@ import com.rest.investment.product.RProduct;
 import com.rest.investment.user.EUser;
 import com.rest.investment.user.RUser;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.Timeout;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
@@ -29,6 +32,7 @@ import org.springframework.test.web.reactive.server.FluxExchangeResult;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.test.web.reactive.server.WebTestClient.ResponseSpec;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class CMyInvestmentTests extends IntegratedTests {
 
     @Autowired
@@ -36,6 +40,9 @@ public class CMyInvestmentTests extends IntegratedTests {
 
     @Autowired
     private ObjectMapper objectMapper;
+    
+    @Autowired
+    private RInvestment rInvestment;
 
     @Autowired
     private RProduct rProduct;
@@ -43,11 +50,15 @@ public class CMyInvestmentTests extends IntegratedTests {
     @Autowired
     private RUser rUser;
 
-    @Autowired
-    private RInvestment rInvestment;
+    @AfterAll
+    public void afterAll() {
+        rInvestment.deleteAll();
+        rProduct.deleteAll();
+        rUser.deleteAll();
+    }
 
     @BeforeEach
-    public void delete() {
+    public void beforeEach() {
         rInvestment.deleteAll();
         rProduct.deleteAll();
         rUser.deleteAll();
@@ -55,7 +66,7 @@ public class CMyInvestmentTests extends IntegratedTests {
     
     @Test
     @Timeout(value = 3000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("CMyInvestmentTests: get")
+    @DisplayName("get")
     public void get() throws JsonProcessingException {
         /* given */
         String uri = "api/investment/my/investments";
@@ -125,7 +136,7 @@ public class CMyInvestmentTests extends IntegratedTests {
 
     @Test
     @Timeout(value = 3000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("CMyInvestmentTests: post api/investment/my/investments")
+    @DisplayName("post")
     public void post() throws JsonProcessingException {
         /* given */
         String uri = "api/investment/my/investments";
@@ -162,7 +173,6 @@ public class CMyInvestmentTests extends IntegratedTests {
 
         ResponseSpec rs = webTestClient.method(HttpMethod.POST)
                 .uri(uri)
-                // .header("X-USER-ID", String.valueOf(uData0.getUserId()))
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(dIPostMyInvestmentsStr)
                 .exchange();

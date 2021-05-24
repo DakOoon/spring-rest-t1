@@ -29,7 +29,7 @@ public class SGetMyInvestmentsTests extends InvestmentApplicationTests {
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("SGetMyInvestmentsTests: success")
+    @DisplayName("success")
     public void success() {
         /* given */
         Long userId = 33L;
@@ -67,7 +67,7 @@ public class SGetMyInvestmentsTests extends InvestmentApplicationTests {
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("SGetMyInvestmentsTests: withoutUserId")
+    @DisplayName("withoutUserId")
     public void withoutUserId() {
         /* given */
         Mockito.doReturn(Arrays.asList())

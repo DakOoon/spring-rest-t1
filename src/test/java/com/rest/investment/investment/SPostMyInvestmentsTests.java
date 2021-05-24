@@ -42,7 +42,7 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("SPostMyInvestmentsTests: success")
+    @DisplayName("success")
     public void success() {
         /* given */
         Long userId = 10L;
@@ -104,7 +104,7 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
     
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("SPostMyInvestmentsTests: validateInput")
+    @DisplayName("validateInput")
     public void validateInput() {
         /* given */
         Long normalUserId = 1L;
@@ -172,7 +172,7 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
     
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("SPostMyInvestmentsTests: checkInvestingAmountLessThanMinimumAmount")
+    @DisplayName("checkInvestingAmountLessThanMinimumAmount")
     public void checkInvestingAmountLessThanMinimumAmount() {
         /* given */
         Long userId = 1L;
@@ -236,7 +236,7 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
     
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("SPostMyInvestmentsTests: checkInvestingAmountEqualToMinimumAmount")
+    @DisplayName("checkInvestingAmountEqualToMinimumAmount")
     public void checkInvestingAmountEqualToMinimumAmount() {
         /* given */
         Long userId = 1L;
@@ -300,7 +300,7 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
     
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("SPostMyInvestmentsTests: checkInvestingAmountEqualToMinimumLessThanTotal")
+    @DisplayName("checkInvestingAmountEqualToMinimumLessThanTotal")
     public void checkInvestingAmountEqualToMinimumLessThanTotal() {
         /* given */
         Long userId = 1L;
@@ -364,7 +364,7 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
     
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("SPostMyInvestmentsTests: checkInvestingAmountGreaterThanMinimumLessThanTotal")
+    @DisplayName("checkInvestingAmountGreaterThanMinimumLessThanTotal")
     public void checkInvestingAmountGreaterThanMinimumLessThanTotal() {
         /* given */
         Long userId = 1L;
@@ -430,7 +430,7 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
     
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("SPostMyInvestmentsTests: checkInvestingAmountEqualToTotal")
+    @DisplayName("checkInvestingAmountEqualToTotal")
     public void checkInvestingAmountEqualToTotal() {
         /* given */
         Long userId = 1L;
@@ -496,7 +496,7 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
     
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("SPostMyInvestmentsTests: checkInvestingAmountGreaterThanTotal")
+    @DisplayName("checkInvestingAmountGreaterThanTotal")
     public void checkInvestingAmountGreaterThanTotal() {
         /* given */
         Long userId = 1L;
@@ -560,7 +560,7 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
     
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("SPostMyInvestmentsTests: checkUser")
+    @DisplayName("checkUser")
     public void checkUser() {
         /* given */
         Long userId = 1L;
@@ -622,7 +622,7 @@ public class SPostMyInvestmentsTests extends InvestmentApplicationTests {
     
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("SPostMyInvestmentsTests: checkProduct")
+    @DisplayName("checkProduct")
     public void checkProduct() {
         /* given */
         Long userId = 1L;

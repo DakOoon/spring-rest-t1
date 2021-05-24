@@ -18,12 +18,16 @@ import com.rest.investment.user.EUser;
 import com.rest.investment.user.RUser;
 import com.rest.investment.util.DateTimeUtils;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.Timeout;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class RProductTests extends InvestmentApplicationTests {
     
     @Autowired
@@ -35,8 +39,15 @@ public class RProductTests extends InvestmentApplicationTests {
     @Autowired
     private RUser rUser;
 
+    @AfterAll
+    public void afterAll() {
+        rInvestment.deleteAll();
+        rProduct.deleteAll();
+        rUser.deleteAll();
+    }
+
     @BeforeEach
-    public void delete() {
+    public void beforeEach() {
         rInvestment.deleteAll();
         rProduct.deleteAll();
         rUser.deleteAll();
@@ -44,7 +55,7 @@ public class RProductTests extends InvestmentApplicationTests {
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("RProductTests: entity")
+    @DisplayName("entity")
     public void entity() {
         /* given */
         EProduct origin = EProduct.builder()
@@ -87,7 +98,7 @@ public class RProductTests extends InvestmentApplicationTests {
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("RProductTests: entityWithDefault")
+    @DisplayName("entityWithDefault")
     public void entityWithDefault() {
         /* given */
         EProduct origin = EProduct.builder()
@@ -117,7 +128,7 @@ public class RProductTests extends InvestmentApplicationTests {
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("RProductTests: formula")
+    @DisplayName("formula")
     public void formula() {
         /* given */
         Long totalInvestingAmount = 5000L;
@@ -187,7 +198,7 @@ public class RProductTests extends InvestmentApplicationTests {
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("RProductTests: findByDate")
+    @DisplayName("findByDate")
     public void findByDate() {
         /* given */
         EProduct data0 = EProduct.builder()

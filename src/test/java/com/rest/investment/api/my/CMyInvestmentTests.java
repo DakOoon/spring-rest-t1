@@ -6,10 +6,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rest.investment.api.my.DIGetMyInvestments;
-import com.rest.investment.api.my.DIPostMyInvestments;
-import com.rest.investment.api.my.DOGetMyInvestments;
-import com.rest.investment.api.my.DOPostMyInvestments;
 import com.rest.investment.api.UnitTests;
 import com.rest.investment.investment.SGetMyInvestments;
 import com.rest.investment.investment.SPostMyInvestments;
@@ -43,7 +39,7 @@ public class CMyInvestmentTests extends UnitTests {
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("CMyInvestmentTests: get")
+    @DisplayName("get")
     public void get() throws Exception {
         /* given */
         String uri = "/api/investment/my/investments";
@@ -81,7 +77,7 @@ public class CMyInvestmentTests extends UnitTests {
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("CMyInvestmentTests: post")
+    @DisplayName("post")
     public void post() throws Exception {
         /* given */
         String uri = "/api/investment/my/investments";
@@ -116,7 +112,7 @@ public class CMyInvestmentTests extends UnitTests {
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("CMyInvestmentTests: postWithHeader")
+    @DisplayName("postWithHeader")
     public void postWithHeader() throws Exception {
         /* given */
         String uri = "/api/investment/my/investments";

@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rest.investment.api.product.DIGetProducts;
-import com.rest.investment.api.product.DOGetProducts;
 import com.rest.investment.api.UnitTests;
 import com.rest.investment.product.SGetProducts;
 
@@ -37,7 +35,7 @@ public class CProductsTests extends UnitTests {
 
     @Test
     @Timeout(value = 1000L, unit = TimeUnit.MILLISECONDS)
-    @DisplayName("CProductsTests: get")
+    @DisplayName("get")
     public void get() throws Exception {
         /* given */
         String uri = "/api/investment/products";
