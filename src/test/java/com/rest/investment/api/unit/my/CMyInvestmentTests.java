@@ -1,4 +1,4 @@
-package com.rest.investment.api.my;
+package com.rest.investment.api.unit.my;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -6,7 +6,11 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rest.investment.api.UnitTests;
+import com.rest.investment.api.my.DIGetMyInvestments;
+import com.rest.investment.api.my.DIPostMyInvestments;
+import com.rest.investment.api.my.DOGetMyInvestments;
+import com.rest.investment.api.my.DOPostMyInvestments;
+import com.rest.investment.api.unit.UnitTests;
 import com.rest.investment.investment.SGetMyInvestments;
 import com.rest.investment.investment.SPostMyInvestments;
 

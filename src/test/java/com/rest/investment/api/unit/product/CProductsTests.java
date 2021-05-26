@@ -1,4 +1,4 @@
-package com.rest.investment.api.product;
+package com.rest.investment.api.unit.product;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rest.investment.api.UnitTests;
+import com.rest.investment.api.product.DIGetProducts;
+import com.rest.investment.api.product.DOGetProducts;
+import com.rest.investment.api.unit.UnitTests;
 import com.rest.investment.product.SGetProducts;
 
 import org.junit.jupiter.api.DisplayName;
