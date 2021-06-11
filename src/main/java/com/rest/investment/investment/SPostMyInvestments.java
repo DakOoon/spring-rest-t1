@@ -96,7 +96,7 @@ public class SPostMyInvestments {
                     .investingAmount(invAmt)
                     .build();
             EInvestment result = rInvestment.save(investment);
-            // flush() for @CreationTimestamp
+            // flush() for InvestedAt@CreationTimestamp
             // The result can be null when use saveAndFlush() instead of save()
             rInvestment.flush();
 
