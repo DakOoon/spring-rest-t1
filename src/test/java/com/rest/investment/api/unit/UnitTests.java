@@ -1,4 +1,4 @@
-package com.rest.investment.api;
+package com.rest.investment.api.unit;
 
 import com.rest.investment.InvestmentApplicationTests;
 

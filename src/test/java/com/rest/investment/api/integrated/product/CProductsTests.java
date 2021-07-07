@@ -1,4 +1,4 @@
-package com.rest.investment.integrated.api.product;
+package com.rest.investment.api.integrated.product;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rest.investment.integrated.IntegratedTests;
+import com.rest.investment.api.integrated.IntegratedTests;
 import com.rest.investment.api.product.DIGetProducts;
 import com.rest.investment.api.product.DOGetProducts;
 import com.rest.investment.product.EProduct;
