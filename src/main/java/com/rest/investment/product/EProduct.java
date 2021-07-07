@@ -36,12 +36,10 @@ public class EProduct {
     @Builder.Default
     private Long totalInvestingAmount = 0L;
 
-    @Column(name = "current_investing_amount", nullable = false, columnDefinition = "long default 0")
     @Formula("(SELECT NVL(SUM(inv.investing_amount), 0) FROM INVESTMENT inv WHERE inv.product_id = product_id)")
     @Builder.Default
     private Long currentInvestingAmout = 0L;
 
-    @Column(name = "investor_count", nullable = false, columnDefinition = "long default 0")
     @Formula("(SELECT NVL(COUNT(1), 0) FROM INVESTMENT inv WHERE inv.product_id = product_id)")
     @Builder.Default
     private Long investorCount = 0L;
